@@ -1,13 +1,13 @@
-Oso polar si si si si
-tiburón no si si si
-elefante si no si si
-carpa herbivora no no si si
-ardilla si si no si
-pirañas no si no si
-lince boreal si si si no
-esfireno no si si no
-pez payaso no no no si
-kinkajou si si no no
-saola si no si no
-Kakapo si no no no
-pez loro no no no no
+"Oso-polar",si,si,si,si
+"tiburón",no,si,si,si
+"elefante",si,no,si,si
+"carpa-herbivora",no,no,si,si
+"ardilla",si,si,no,si
+"pirañas",no,si,no,si
+"lince-boreal",si,si,si,no
+"esfireno",no,si,si,no
+"pez-payaso",no,no,no,si
+"kinkajou",si,si,no,no
+"saola",si,no,si,no
+"Kakapo",si,no,no,no
+"pez-loro",no,no,no,no
