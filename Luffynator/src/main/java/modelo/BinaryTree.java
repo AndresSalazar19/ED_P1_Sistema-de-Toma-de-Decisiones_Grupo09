@@ -5,6 +5,7 @@
 package modelo;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -15,6 +16,7 @@ import java.util.Stack;
  */
 
 public class BinaryTree<E>{
+    
     private NodeBinaryTree<E> root;
     
     public BinaryTree(){
@@ -23,6 +25,10 @@ public class BinaryTree<E>{
     
     public NodeBinaryTree<E> getRoot(){
         return root;
+    }
+
+    public void setRoot(NodeBinaryTree<E> root) {
+        this.root = root;
     }
     
     public BinaryTree(E e){
@@ -43,6 +49,40 @@ public class BinaryTree<E>{
         }
         return false;
     }
+    
+    public void buildDecisionBinaryTree(LinkedList<String> preguntas, List<String[]> respuestas) {
+        if (preguntas.isEmpty() || respuestas.isEmpty()) {
+            throw new IllegalArgumentException("Las preguntas y respuestas no deben estar vacías.");
+        }
+
+        // Crear la raíz del árbol con la primera pregunta
+        NodeBinaryTree<String> root = new NodeBinaryTree<>(preguntas.get(0));
+        for (String[] respuesta : respuestas) {
+            // Insertar cada conjunto de respuestas en el árbol
+            insert(root, preguntas, respuesta, 0);
+        }
+    }
+
+    private void insert(NodeBinaryTree<String> node, LinkedList<String> preguntas, String[] respuestas, int level) {
+        if (level < preguntas.size() - 1) {
+            if (respuestas[level].equalsIgnoreCase("sí")) {
+                // Si la respuesta es "sí", ve al subárbol izquierdo
+                if (node.getLeft().getRoot() == null) {
+                    node.getLeft().setRoot(new NodeBinaryTree<>(preguntas.get(level + 1)));
+                }
+                insert(node.getLeft().getRoot(), preguntas, respuestas, level + 1);
+            } else {
+                // Si la respuesta es "no", ve al subárbol derecho
+                if (node.getRight().getRoot() == null) {
+                    node.getRight().setRoot(new NodeBinaryTree<>(preguntas.get(level + 1)));
+                }
+                insert(node.getRight().getRoot(), preguntas, respuestas, level + 1);
+            }
+        }
+    }
+
+
+
 
     public int countLeavesRecursive(){
         if (this.isEmpty()){
