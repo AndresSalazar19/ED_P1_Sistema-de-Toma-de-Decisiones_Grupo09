@@ -9,39 +9,34 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 /**
  * FXML Controller class
  *
  * @author asala
  */
-public class InicioController implements Initializable {
-    
-    @FXML
-    private ImageView luffyInicio;
-    
+public class OpcionesJuegoController implements Initializable {
+
     @FXML 
     public void play(String fileName){
         MediaPlayerManager.getInstance().play(fileName);
     }
-
-    @FXML
-    public void comenzar() throws IOException{
-        System.out.println("Comenzando....");
-        App.setRoot("opcionesJuego");
+    
+     @FXML
+    public void volver() throws IOException{
+        App.setRoot("inicio");
     }
-
-
+    
+    @FXML
+    public void jugar(){
+        System.out.println("jugar");
+        // Lógica para cambiar de escena o realizar otra acción
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        play("music/One Piece OST - Nakama no Shirushi da! Sign Of Friendship.mp3");
-        
-                // Carga la imagen desde los recursos
-        Image image = new Image(getClass().getResourceAsStream("/imagenes/Inicio Luffy.png"));
-        luffyInicio.setImage(image);
-    }
-   
+        play("music/おれの最高地点.mp3");
+    }    
 }
