@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator.OpcionesJuegoController">
+<Pane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator.PreguntasController">
     <stylesheets>
         <URL value="@/styles/inicio.css" />
     </stylesheets>
@@ -19,13 +19,11 @@
         <!-- Imagen del personaje (aquí puedes colocar una imagen de Luffy si tienes una) -->
         <Label fx:id="imageLabel" layoutX="655.0" layoutY="73.0" text="👒" /> <!-- Sustituye el texto por una imagen -->
 
-        <!-- Botón para jugar -->
-        <Button fx:id="jugarButton" layoutX="361.0" layoutY="393.0" onAction="#jugar" text="Jugar" styleClass="button-general"/>
-        
+
         <!-- Campo de texto para el número de preguntas -->
         <TextField layoutX="424.0" layoutY="245.0" />
         <Text fx:id="statsLabel" layoutX="161.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de preguntas:" />
-
+        
         <!-- Botón para volver -->
         <Button fx:id="volverButton" layoutX="83.0" layoutY="393.0" mnemonicParsing="false" onAction="#volver" text="Volver" styleClass="button-general"/>
     </children>

@@ -10,11 +10,11 @@
     <stylesheets>
         <URL value="@/styles/inicio.css" />
     </stylesheets>
-   <children> <!-- Sustituye el texto por una imagen -->
+   <children>
+      <ImageView fx:id="luffyInicio" fitHeight="465.0" fitWidth="807.0" layoutX="80.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" /> <!-- Sustituye el texto por una imagen -->
 
       <!-- Botón para jugar -->
-      <Button id="playButton" fx:id="primaryButton" layoutX="374.0" layoutY="516.0" onAction="#comenzar" text="Comenzar" />
-      <ImageView fx:id="luffyInicio" fitHeight="465.0" fitWidth="807.0" layoutX="80.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" />
+    <Button fx:id="ComenzarButton" layoutX="330.0" layoutY="501.0" onAction="#comenzar" styleClass="button-general" text="Comenzar" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

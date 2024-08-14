@@ -14,9 +14,13 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+    private static Stage primaryStage; // Variable estática para el Stage principal
+
+
 
     @Override
     public void start(Stage stage) throws IOException {
+        primaryStage = stage; // Asignar el Stage principal a la variable estática
         scene = new Scene(loadFXML("inicio"), 800, 600);
         stage.setScene(scene);
         stage.show();
@@ -31,6 +35,10 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
+    public static Stage getPrimaryStage() {
+        return primaryStage; // Método para obtener el Stage principal
+    }
+        
     public static void main(String[] args) {
         launch();
     }

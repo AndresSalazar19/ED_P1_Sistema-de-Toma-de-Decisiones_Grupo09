@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane fx:id="loadingPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Circle fx:id="loadingCircle" centerX="300.0" centerY="200.0" fill="TRANSPARENT" radius="50.0" stroke="orange" strokeWidth="5.0" />
+        <Label fx:id="loadingLabel" layoutX="250.0" layoutY="300.0" text="Cargando..." textFill="orange" />
+    </children>
+</AnchorPane>
