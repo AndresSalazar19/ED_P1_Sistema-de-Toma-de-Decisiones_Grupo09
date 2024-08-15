@@ -1,0 +1,47 @@
+package modelo;
+
+/**
+ *
+ * @author Ayman El Salous Mnz
+ * @param <String>
+ */
+public class NodeBinaryTreeL {
+    public String content;
+    public BinaryTreeL left;
+    public BinaryTreeL right;
+    
+    public NodeBinaryTreeL(String c){
+        content = c;
+        left = null;
+        right = null;
+    }
+    
+    public BinaryTreeL getRight(){
+        return this.right;
+    }
+    
+    public BinaryTreeL getLeft(){
+        return this.left; 
+    }
+    
+    public String getContent(){
+        return content;
+    }
+    public void setContent(String s){
+        this.content = s;
+    }
+    /*public void setLeft(BinaryTreeL nodo){
+         if (!(this.getRoot() == null)) {
+            if (root.left == null) {
+                root.left = nodo;
+            } 
+        }
+    }
+    public void setRight(BinaryTreeL nodo){
+         if (!(this.root == null)) {
+            if (root.right == null) {
+                root.right = nodo;
+            } 
+        }
+    }*/
+}
