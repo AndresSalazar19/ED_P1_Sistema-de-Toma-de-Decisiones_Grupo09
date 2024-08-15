@@ -1,0 +1,200 @@
+package modelo;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+/**
+ *
+ * @author Ayman El Salous Mnz
+ * 
+ */
+public class BinaryTreeL {
+    NodeBinaryTreeL root;
+    
+    public BinaryTreeL(){
+        root = null;
+    }
+    public BinaryTreeL(String p){
+        root = new NodeBinaryTreeL(p);
+    }
+    
+   
+    public boolean isEmpty(){
+        return root == null;
+    }
+
+     public NodeBinaryTreeL getRoot(){
+        return root;
+    }
+    
+    public BinaryTreeL(NodeBinaryTreeL root){
+        this.root = root;
+    }
+    public boolean isLeaf(){
+        if(!this.isEmpty()){
+            return this.root.getLeft() == null && this.root.getRight() == null;
+        }
+        return false;
+    }
+    public ArrayList<String> InOrder(){//Añade a arrayList en InOrder
+               
+        ArrayList<String> recorrido = new ArrayList<>();
+        
+        if( isEmpty() ) return recorrido;
+        
+       // izquierda
+        if( root.getLeft() != null ) recorrido.addAll(root.getLeft().InOrder());//izquierda
+        // raiz
+        recorrido.add( root.getContent() );
+        //derecha
+        if( root.getRight() != null ) recorrido.addAll(root.getRight().InOrder());
+        
+        return recorrido;
+    }
+    public void recorrerEnorden(){
+        
+        if (!this.isEmpty()){
+            
+            // 1. recorrer enorden en hijo izquierdo
+            if (root.getLeft()!=null){
+                root.getLeft().recorrerEnorden(); 
+            }
+        
+            // 2. Imprimir a la raiz
+            System.out.println(this.root.getContent());
+            
+            // 3. recorrer enorden en hijo derecho
+            if (root.getRight()!=null){
+                root.getRight().recorrerEnorden(); 
+            }
+            
+        }
+    }
+    public void cargar(String p, String r){
+        root =null; 
+        
+        ArrayList<String> preguntas = new ArrayList<>();
+       
+        HashMap<String, ArrayList<String>> respuestas = new HashMap<>();
+        
+        try{
+            
+            BufferedReader br = new BufferedReader( new FileReader( "src/main/java/archivos/" + p +".csv"  ) );
+            String line;
+            
+            while ( ( line = br.readLine() ) != null ){
+                
+                preguntas.add(line);
+            }
+            
+            br = new BufferedReader( new FileReader( "src/main/java/archivos/" + r + ".csv"  ) );
+            
+            while( ( line = br.readLine() ) != null ){
+                
+                String[] datos = line.split(",");//respuestas
+                ArrayList<String> resp = new ArrayList<>();
+                
+              
+                if( datos.length - 1 == preguntas.size() ){//respuestas = numero preguntas
+                    
+                    for( int i = 1; i < datos.length; i++){
+                        resp.add(datos[i]);
+                    }
+                            
+                    
+                    if ( !respuestas.values().contains(resp) ) {//verifica si hay respuestas repetidas
+                        respuestas.put(datos[0], resp);
+                    } 
+                }         
+            }
+            
+            System.out.println(preguntas);//para ver las listas
+            System.out.println(respuestas);
+        }
+        catch(IOException ioe){
+            System.err.println(ioe);
+        };
+        
+        BinaryTreeL arboll = anadirPregunta(preguntas, 0);
+        arboll.recorrerEnorden();
+       
+        /*for( int i = 1; i < preguntas.size(); i++){// añade pregunta a la lista 
+            anadirPreguntaporniveles(preguntas.get(i));
+        }*/
+        /*for( String animal : respuestas.keySet() ){//añade animal
+            anadirAnimal( animal,  respuestas.get(animal) );
+        }*/
+        
+       
+    }
+    
+    private BinaryTreeL anadirPregunta(ArrayList<String> preguntas, int index){// se vera como hacerlo para que se limite dependiendo del indece que ponga el usuario
+        if(index >= preguntas.size()){
+            return null;
+        
+        }
+        String pregunta = preguntas.get(index);
+        BinaryTreeL nodopregunta = new BinaryTreeL(pregunta);
+       
+        
+        if(!pregunta.contains("¿") || (!pregunta.contains("?"))){
+            return nodopregunta;
+        }else{
+            if(nodopregunta.getRoot().left == null){
+
+                nodopregunta.getRoot().left = anadirPregunta(preguntas, index+1);
+            }
+            if(nodopregunta.getRoot().right == null){
+                nodopregunta.getRoot().right = anadirPregunta(preguntas, index+1);
+            }
+                
+        }
+        
+        return nodopregunta;
+        
+    }
+    
+    
+    /*private BinaryTreeL anadirAnimal( BinaryTreeL arbol, String animal, ArrayList<String> respuestas){ //al parecer hay errores en esta parte-revisar
+        if( respuestas.isEmpty() ) return null;
+        if(arbol.isEmpty())return null;
+        //Elimino la primera respuesta 
+        if ( respuestas.remove(0).equals("si") ){
+            //si el arbol actual es hoja, significa que es la ultima pregunta
+            
+            
+            if( isLeaf()  ) {
+                if(root.getLeft().getRoot() != null){
+                //root.getLeft().getRoot().setContent(animal); return true;}
+            }
+            if(root.getLeft().getRoot() != null){           
+            root.getLeft().anadirAnimal(animal, respuestas);
+            return true;}
+        }
+        //si no
+        if( isLeaf()  ) {
+            
+            root.getRight().getRoot().setContent(animal); return true;
+        }
+        
+        root.getRight().anadirAnimal(animal, respuestas);
+        return true;
+    }*/
+    public String toString(){
+        
+        if ( isEmpty() ) return "[ ]";
+        String texto = "[ ";
+        ArrayList<String> contenido = InOrder();
+        
+        for ( int i = 0; i < contenido.size() - 1; i++ ){
+            texto += contenido.get(i) + ", ";
+        }
+        texto+= contenido.get( contenido.size()-1) + " ]";
+        
+        return texto;
+    }
+    
+}
