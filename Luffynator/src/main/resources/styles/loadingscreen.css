@@ -1,48 +1,17 @@
-/* Estilo para el pane principal */
-#loadingPane {
-    -fx-background-color: linear-gradient(to bottom, #87CEEB, #00BFFF);
-}
 
-/* Estilo para el círculo de carga */
-#loadingCircle {
-    -fx-stroke: #FFA500; /* Color del borde del círculo */
-    -fx-stroke-width: 5;
-    -fx-fill: transparent; /* Círculo transparente */
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 2, 2); /* Sombra para darle profundidad */
-    -fx-translate-y: 0;
-    -fx-transition: -fx-translate-y 0.3s ease-in-out;
+/* Estilo principal */
+.mainFxmlClass {
+    -fx-background-color: linear-gradient(to bottom, #87CEEB, #00BFFF); /* Gradiente para el fondo */
 }
 
 
-/* Estilo para el texto de carga */
-#loadingLabel {
-    -fx-text-fill: #FFA500; /* Color del texto */
-    -fx-font-family: "Arial Bold";
-    -fx-font-size: 24px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 2, 0, 1, 1); /* Sombra ligera para el texto */
-    -fx-translate-y: 20;
-    -fx-transition: -fx-translate-y 0.3s ease-in-out;
-}
-
-
-
-/* Animación para el círculo de carga */
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-/* Aplicar la animación al círculo */
-#loadingCircle {
-    animation: rotate 2s linear infinite;
-}
-
-/* Estilo adicional para una pantalla completa */
-.fullscreen {
-    -fx-background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
-    -fx-alignment: center;
+#progressIndicator {
+    -fx-progress-color: #9370DB; /* Púrpura medio para representar la Gomu Gomu no Mi */
+    -fx-accent: #9370DB;
+    -fx-background-insets: 0;
+    -fx-padding: 10;
+    -fx-border-color: #9370DB;
+    -fx-border-width: 2;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
 }

@@ -4,7 +4,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
@@ -15,17 +14,12 @@
     <children>
         <!-- Texto principal con el nombre Luffynator -->
         <Label fx:id="titleLabel" layoutX="242.0" layoutY="81.0" text="Luffynator" />
-
-        <!-- Imagen del personaje (aquí puedes colocar una imagen de Luffy si tienes una) -->
-        <Label fx:id="imageLabel" layoutX="655.0" layoutY="73.0" text="👒" /> <!-- Sustituye el texto por una imagen -->
-
-
-        <!-- Campo de texto para el número de preguntas -->
-        <TextField layoutX="424.0" layoutY="245.0" />
-        <Text fx:id="statsLabel" layoutX="161.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de preguntas:" />
+        <Text fx:id="pregunta" layoutX="358.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pregunta" />
         
-        <!-- Botón para volver -->
-        <Button fx:id="volverButton" layoutX="83.0" layoutY="393.0" mnemonicParsing="false" onAction="#volver" text="Volver" styleClass="button-general"/>
+        <!-- Botones -->
+        <Button fx:id="volverButton" layoutX="45.0" layoutY="481.0" mnemonicParsing="false" onAction="#volver" styleClass="button-general" text="Volver" />
+        <Button fx:id="siButton" layoutX="243.0" layoutY="329.0" mnemonicParsing="false" styleClass="button-general" text="Sí" />
+        <Button fx:id="noButton" layoutX="446.0" layoutY="329.0" mnemonicParsing="false" styleClass="button-general" text="No" />
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import java.net.URL?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="loadingPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="loadingPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator.LoadingScreenController">
+    <stylesheets>
+        <URL value="@/styles/loadingScreen.css" />
+    </stylesheets>
     <children>
-        <Circle fx:id="loadingCircle" centerX="300.0" centerY="200.0" fill="TRANSPARENT" radius="50.0" stroke="orange" strokeWidth="5.0" />
-        <Label fx:id="loadingLabel" layoutX="250.0" layoutY="300.0" text="Cargando..." textFill="orange" />
-    </children>
+      <ProgressIndicator fx:id="progressIndicator" layoutX="198.0" layoutY="189.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="176.0" prefWidth="382.0" progress="0.0" />
+      <Text fx:id="loadingText" layoutX="357.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cargando" />    </children>
 </AnchorPane>

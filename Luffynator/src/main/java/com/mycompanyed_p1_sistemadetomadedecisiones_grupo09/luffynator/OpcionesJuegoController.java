@@ -11,10 +11,10 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 
 /**
@@ -23,7 +23,10 @@ import javafx.scene.input.MouseEvent;
  * @author asala
  */
 public class OpcionesJuegoController implements Initializable {
-
+    
+    @FXML
+    private ImageView luffyAmazed;
+      
     @FXML 
     public void play(String fileName){
         MediaPlayerManager.getInstance().play(fileName);
@@ -49,7 +52,7 @@ public class OpcionesJuegoController implements Initializable {
             @Override
             protected Void call() throws Exception {
                 // Aquí puedes realizar tareas en segundo plano
-                Thread.sleep(3000); // Simula un tiempo de carga
+                Thread.sleep(2000); // Simula un tiempo de carga
                 return null;
             }
 
@@ -71,5 +74,9 @@ public class OpcionesJuegoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         play("music/おれの最高地点.mp3");
+                
+        Image image = new Image(getClass().getResourceAsStream("/imagenes/luffy amazed.png"));
+        luffyAmazed.setImage(image);
+        
     }    
 }
