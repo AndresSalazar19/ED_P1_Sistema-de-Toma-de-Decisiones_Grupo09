@@ -16,8 +16,8 @@ public class NodeBinaryTree<E> {
     
     public NodeBinaryTree(E content){
         this.content = content;
-        this.left = null;
-        this.right = null;
+        this.left = new BinaryTree<>();  // Inicializamos como un árbol vacío
+        this.right = new BinaryTree<>(); // Inicializamos como un árbol vacío
     }
 
     public E getContent() {
@@ -43,5 +43,4 @@ public class NodeBinaryTree<E> {
     public void setRight(BinaryTree<E> right) {
         this.right = right;
     }
-    
 }

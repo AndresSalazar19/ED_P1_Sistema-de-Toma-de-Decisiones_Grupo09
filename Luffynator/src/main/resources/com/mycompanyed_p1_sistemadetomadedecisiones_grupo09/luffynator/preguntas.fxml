@@ -13,7 +13,7 @@
     </stylesheets>
     <children>
         <!-- Texto principal con el nombre Luffynator -->
-        <Label fx:id="titleLabel" layoutX="242.0" layoutY="81.0" text="Luffynator" />
+        <Label fx:id="preguntaLabel" layoutX="242.0" layoutY="81.0" text="Luffynator" />
         <Text fx:id="pregunta" layoutX="358.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pregunta" />
         
         <!-- Botones -->

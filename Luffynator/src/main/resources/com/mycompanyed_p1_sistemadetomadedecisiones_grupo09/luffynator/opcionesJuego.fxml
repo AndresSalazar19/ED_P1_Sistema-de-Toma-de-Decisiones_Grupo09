@@ -18,7 +18,7 @@
         <Button fx:id="jugarButton" layoutX="378.0" layoutY="526.0" onAction="#jugar" styleClass="button-general" text="Jugar" />
         
         <!-- Campo de texto para el número de preguntas -->
-        <TextField layoutX="311.0" layoutY="245.0" prefHeight="25.0" prefWidth="139.0" />
+        <TextField fx:id="numPreguntasTF" layoutX="311.0" layoutY="245.0" prefHeight="25.0" prefWidth="139.0" />
         <Text fx:id="statsLabel" layoutX="57.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de preguntas:" />
 
         <!-- Botón para volver -->
