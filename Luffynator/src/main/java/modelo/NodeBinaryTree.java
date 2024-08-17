@@ -9,38 +9,38 @@ package modelo;
  * @author asala
  * @param <E>
  */
-public class NodeBinaryTree<E> {
-    private E content;
-    private BinaryTree<E> left;
-    private BinaryTree<E> right;
+public class NodeBinaryTree {
+    private String content;
+    private BinaryTree left;
+    private BinaryTree right;
     
-    public NodeBinaryTree(E content){
+    public NodeBinaryTree(String content){
         this.content = content;
-        this.left = new BinaryTree<>();  // Inicializamos como un árbol vacío
-        this.right = new BinaryTree<>(); // Inicializamos como un árbol vacío
+        this.left = new BinaryTree();  // Inicializamos como un árbol vacío
+        this.right = new BinaryTree(); // Inicializamos como un árbol vacío
     }
 
-    public E getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(E content) {
+    public void setContent(String content) {
         this.content = content;
     }
 
-    public BinaryTree<E> getLeft() {
+    public BinaryTree getLeft() {
         return left;
     }
 
-    public void setLeft(BinaryTree<E> left) {
+    public void setLeft(BinaryTree left) {
         this.left = left;
     }
 
-    public BinaryTree<E> getRight() {
+    public BinaryTree getRight() {
         return right;
     }
 
-    public void setRight(BinaryTree<E> right) {
+    public void setRight(BinaryTree right) {
         this.right = right;
     }
 }

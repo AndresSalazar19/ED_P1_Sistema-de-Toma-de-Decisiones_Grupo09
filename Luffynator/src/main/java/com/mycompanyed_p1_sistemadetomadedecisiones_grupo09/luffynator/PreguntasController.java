@@ -29,8 +29,8 @@ public class PreguntasController implements Initializable {
     @FXML
     private Button noButton;
 
-    private BinaryTree<String> decisionTree;
-    private NodeBinaryTree<String> currentNode;
+    private BinaryTree decisionTree;
+    private NodeBinaryTree currentNode;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

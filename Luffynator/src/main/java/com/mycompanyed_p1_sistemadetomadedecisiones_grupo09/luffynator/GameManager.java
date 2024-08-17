@@ -19,7 +19,7 @@ import java.util.List;
 public class GameManager {
     private static GameManager instance;
     private int numPreguntas;
-    private BinaryTree<String> decisionTree;
+    private BinaryTree decisionTree;
 
     // Constructor privado para evitar la instanciación directa
     private GameManager() {}
@@ -40,11 +40,11 @@ public class GameManager {
         this.numPreguntas = numPreguntas;
     }
 
-    public BinaryTree<String> getDecisionTree() {
+    public BinaryTree getDecisionTree() {
         return decisionTree;
     }
     
-    public void setDecisionTree(BinaryTree<String> decisionTree) {
+    public void setDecisionTree(BinaryTree decisionTree) {
         this.decisionTree = decisionTree;
     }
         
@@ -68,7 +68,7 @@ public class GameManager {
             }
         }
 
-        decisionTree = new BinaryTree<>();
+        decisionTree = new BinaryTree();
         decisionTree.buildDecisionBinaryTree(preguntas, respuestas);
         this.decisionTree = decisionTree;
     }
