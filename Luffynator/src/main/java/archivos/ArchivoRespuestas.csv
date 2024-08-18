@@ -12,15 +12,27 @@
 "Erizo",si,no,no,no,si
 "pez-loro",no,no,no,no,no 
 "antilope",si,no,no,no,no
-"ratón",no,no,no,no,si
+"gusano-lanudo",no,no,no,no,si
 "babosa-de-mar",no,no,si,no,no
-"ninguno",no,no,si,no,si
+"oruga-de-peluche",no,no,si,no,si
 "komodo",si,si,si,si,no
 "escorpión",si,si,no,si,no
 "pato",si,no,no,si,no
 "llama",si,no,si,si,si
 "mapache",si,no,no,si,si
 "insecto-hoja",si,no,no,no,no
+"cerdo",si,si,no,no,no
+"serpiente-cascabel",no,si,no,no,no
+"rinoceronte",si,si,si,no,no
+"murciélago",no,si,no,no,si
+"nutria",no,no,no,si,si
+"tamarino",no,si,no,si,si
+"pangolín",no,si,no,si,si,
+"pulpo",no,si,si,no,si
+"foca",no,no,si,si,si,
+
+
+
 
 
 
