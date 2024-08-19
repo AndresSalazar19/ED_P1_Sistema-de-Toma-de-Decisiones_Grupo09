@@ -9,12 +9,16 @@ package tda;
  * @author asala
  */
 public class Node {
-        String data;
-        Node prev;
-        Node next;
+        protected String data;
+        protected Node prev;
+        protected Node next;
 
         Node(String data) {
             this.data = data;
             this.prev = this.next = this;
+        }
+        
+        public String getContent(){
+            return data;
         }
     }

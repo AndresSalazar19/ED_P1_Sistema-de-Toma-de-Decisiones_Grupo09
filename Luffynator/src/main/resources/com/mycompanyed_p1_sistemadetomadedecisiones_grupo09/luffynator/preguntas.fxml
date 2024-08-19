@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Text?>
 
 <Pane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator.PreguntasController">
     <stylesheets>
@@ -13,13 +12,15 @@
     </stylesheets>
     <children>
         <!-- Texto principal con el nombre Luffynator -->
-        <Label fx:id="preguntaLabel" layoutX="242.0" layoutY="81.0" text="Luffynator" />
-        <Text fx:id="pregunta" layoutX="358.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pregunta" />
+        <Label fx:id="preguntaLabel" layoutX="352.0" layoutY="111.0" text="Pregunta" />
         
         <!-- Botones -->
         <Button fx:id="volverButton" layoutX="45.0" layoutY="481.0" mnemonicParsing="false" onAction="#volver" styleClass="button-general" text="Volver" />
         <Button fx:id="siButton" layoutX="243.0" layoutY="329.0" mnemonicParsing="false" styleClass="button-general" text="Sí" />
         <Button fx:id="noButton" layoutX="446.0" layoutY="329.0" mnemonicParsing="false" styleClass="button-general" text="No" />
+      <Button fx:id="prevButton" layoutX="243.0" layoutY="329.0" mnemonicParsing="false" styleClass="button-general" text="Prev" visible="false" />
+      <Button fx:id="nextButton" layoutX="446.0" layoutY="329.0" mnemonicParsing="false" styleClass="button-general" text="Next" visible="false" />
+      <Label fx:id="animalLabel" layoutX="362.0" layoutY="171.0" text="Animal" />
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
