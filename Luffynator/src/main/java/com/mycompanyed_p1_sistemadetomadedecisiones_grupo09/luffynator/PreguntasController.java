@@ -4,6 +4,8 @@
  */
 package com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator;
 
+import tda.DecisionTree;
+import tda.NodeDecisionTree;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
@@ -20,7 +22,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import modelo.*;
 
 /**
  * FXML Controller class
@@ -39,6 +40,7 @@ public class PreguntasController implements Initializable {
     private Button noButton;
     
     private List<String> caminoActual = new ArrayList<>();
+    private int contadorPreguntas = 0;
 
     private DecisionTree decisionTree;
     private NodeDecisionTree currentNode;
@@ -79,6 +81,7 @@ public class PreguntasController implements Initializable {
 
 
     private void avanzar(boolean respuestaSi) {
+       contadorPreguntas++;
        // Guardar la decisión en el camino
        caminoActual.add(respuestaSi ? "si" : "no");
 

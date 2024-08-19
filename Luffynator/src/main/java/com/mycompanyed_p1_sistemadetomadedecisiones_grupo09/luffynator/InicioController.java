@@ -42,6 +42,8 @@ public class InicioController implements Initializable {
                 // Carga la imagen desde los recursos
         Image image = new Image(getClass().getResourceAsStream("/imagenes/Inicio Luffy.png"));
         luffyInicio.setImage(image);
+        
+
     }
    
 }

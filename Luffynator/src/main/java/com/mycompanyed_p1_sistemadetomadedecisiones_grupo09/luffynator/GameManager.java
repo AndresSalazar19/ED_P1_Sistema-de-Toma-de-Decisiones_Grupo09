@@ -3,13 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator;
-import modelo.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import tda.*;
+import static tda.CircularDoublyLinkedList.obtenerListaAnimales;
 
 
 /**
@@ -51,6 +52,10 @@ public class GameManager {
         List<String> preguntas = readFile(preguntasFilePath);
         List<String> respuestas = readFile(respuestasFilePath);
         decisionTree = buildDecisionTree(preguntas, respuestas);
+        
+        CircularDoublyLinkedList animales = obtenerListaAnimales(decisionTree);
+        System.out.println("UNPREDITABLKE");
+        animales.display();
     }
 
     public static List<String> readFile(String filePath) throws IOException {
