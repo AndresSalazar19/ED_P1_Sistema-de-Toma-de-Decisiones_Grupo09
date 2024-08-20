@@ -1,0 +1,58 @@
+/* Estilo principal */
+.anchor-pane {
+    -fx-background-color: linear-gradient(to bottom, #87CEEB, #00BFFF); /* Fondo gradiente */
+    -fx-padding: 20px;
+    -fx-background-radius: 15px;
+}
+
+/* Estilo de los labels */
+.label {
+    -fx-text-fill: orange; /* Color del texto */
+    -fx-font-family: "Arial Bold"; /* Fuente del texto */
+    -fx-font-size: 18px; /* Tamaño del texto */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 2, 0, 1, 1); /* Sombra ligera */
+}
+
+/* Estilo del TextField */
+.text-field {
+    -fx-background-color: #F0E68C; /* Color de fondo */
+    -fx-border-color: orange; /* Color del borde */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px; /* Bordes redondeados */
+    -fx-font-family: Arial;
+    -fx-font-size: 16px;
+    -fx-text-fill: #000000; /* Color del texto */
+    -fx-padding: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 4, 0, 2, 2); /* Sombra ligera */
+}
+
+.text-field:focused {
+    -fx-border-color: #FF8C00; /* Color del borde al enfocar */
+    -fx-background-color: #F5DEB3; /* Color de fondo al enfocar */
+}
+
+/* Estilo del botón general */
+.button {
+    -fx-background-color: #FFA500; /* Color de fondo del botón */
+    -fx-text-fill: white; /* Color del texto */
+    -fx-font-family: Arial;
+    -fx-font-size: 18px;
+    -fx-background-radius: 10; /* Bordes redondeados */
+    -fx-cursor: hand; /* Cambia el cursor al pasar sobre el botón */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 2, 2); /* Sombra */
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+    -fx-background-color: #FF8C00; /* Cambia de color al pasar el ratón */
+    -fx-scale-x: 1.1; /* Agranda el botón al pasar el ratón */
+    -fx-scale-y: 1.1;
+}
+
+/* Estilo de la imagen del animal */
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 2, 2); /* Sombra a la imagen */
+    -fx-border-color: orange; /* Borde alrededor de la imagen */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+}

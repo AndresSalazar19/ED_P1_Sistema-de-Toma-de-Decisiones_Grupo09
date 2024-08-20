@@ -151,8 +151,25 @@ public class PreguntasController implements Initializable {
         } else if (ultimoNodo.getYesBranch() == null && ultimoNodo.getNoBranch() == null) {
             // Existe un único animal
             preguntaLabel.setText("¡Gracias! El animal es " + ultimoNodo.getContent() + "!");
+            // Mostrar el primer animal en la lista
+            animalLabel.setText(ultimoNodo.getContent());
+
+            String imagePath = "src/main/resources/imgAnimales/" + ultimoNodo.getContent().toLowerCase() + ".jpg";
+            File imageFile = new File(imagePath);
+
+            if (imageFile.exists()) {
+                Image image = new Image(imageFile.toURI().toString());
+                animalImageView.setImage(image);
+                animalImageBox.setVisible(true);
+            } else {
+                System.out.println("Imagen no encontrada: " + imagePath);
+                animalImageView.setImage(null); // Limpia la vista si no se encuentra la imagen
+            }
+            
+            // Configurar la visibilidad de los botones
             siButton.setDisable(true);
             noButton.setDisable(true);
+            
         } else {
             // Existen varios animales, mostrar la lista de animales
             mostrarListaAnimales();
@@ -174,7 +191,7 @@ public class PreguntasController implements Initializable {
     private void insertNewAnimalInNullNode(boolean isLeft) {
         try {
             // Cargar la vista del diálogo para agregar animal
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AgregarAnimal.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("agregarAnimal.fxml"));
             Parent root = loader.load();
 
             // Obtener el controlador de la vista cargada

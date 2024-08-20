@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator.AgregarAnimalController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../styles/agregarAnimal.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator.AgregarAnimalController">    
         <children>
         <Label layoutX="190.0" layoutY="84.0" text="Ingrese el nombre del animal:" />
         <TextField fx:id="animalTextField" layoutX="190.0" layoutY="108.0" promptText="Nombre del animal" />
