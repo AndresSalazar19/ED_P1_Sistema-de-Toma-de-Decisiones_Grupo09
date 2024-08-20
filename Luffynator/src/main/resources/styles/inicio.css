@@ -1,6 +1,10 @@
 /* Estilo principal */
 .mainFxmlClass {
     -fx-background-color: linear-gradient(to bottom, #87CEEB, #00BFFF); /* Gradiente para el fondo */
+    -fx-background-image: url("/imagenes/OPbackground.jpg"); /* Ruta de la imagen de fondo */
+    -fx-background-size: cover; /* Asegura que la imagen cubra todo el fondo */
+    -fx-background-position: center center; /* Centra la imagen en el Pane */
+    -fx-background-repeat: no-repeat; /* Evita que la imagen se repita */
 }
 
 /* Estilo del título Luffynator */

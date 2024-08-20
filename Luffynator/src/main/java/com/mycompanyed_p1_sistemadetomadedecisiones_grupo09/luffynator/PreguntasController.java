@@ -39,7 +39,8 @@ public class PreguntasController implements Initializable {
     private Button noButton;
     @FXML
     private Button prevButton;
-
+    @FXML
+    private Button agregarAnimalButton;
     @FXML
     private Button nextButton;
     
@@ -128,8 +129,9 @@ public class PreguntasController implements Initializable {
 
     private void finalizarJuego(NodeDecisionTree ultimoNodo) {
         if (ultimoNodo == null) {
+            agregarAnimalButton.setVisible(true);
             // No existe un animal en el árbol para este camino
-            insertNewAnimalInNullNode(true); // Opción a agregar un nuevo animal
+            agregarAnimalButton.setOnAction(e -> insertNewAnimalInNullNode(true)); // Opción a agregar un nuevo animal
         } else if (ultimoNodo.getYesBranch() == null && ultimoNodo.getNoBranch() == null) {
             // Existe un único animal
             preguntaLabel.setText("¡Gracias! El animal es " + ultimoNodo.getContent() + "!");
