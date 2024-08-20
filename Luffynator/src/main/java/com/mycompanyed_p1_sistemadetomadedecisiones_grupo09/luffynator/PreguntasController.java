@@ -18,6 +18,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import static tda.CircularDoublyLinkedList.obtenerListaAnimales;
 
 
@@ -27,10 +30,15 @@ import static tda.CircularDoublyLinkedList.obtenerListaAnimales;
  * @author asala
  */
 public class PreguntasController implements Initializable {
-
+    @FXML
+    private ImageView animalImageView;
+    
+    @FXML
+    private VBox animalImageBox;
+    
     @FXML
     private Label preguntaLabel;
-  @FXML
+    @FXML
     private Label animalLabel;
     @FXML
     private Button siButton;
@@ -188,11 +196,14 @@ public class PreguntasController implements Initializable {
         DecisionTree arbolActual = GameManager.getInstance().getDecisionTree();
         animales = obtenerListaAnimales(arbolActual); // Aquí se asegura la asignación correcta a la variable de clase
         currentAnimalNode = animales.getHead(); // Obtener el primer nodo para inicializar la navegación
-        preguntaLabel.setText("Se encontraron " + animales.length() + " animales, aquí está la lista.");
+        preguntaLabel.setText("Se me ocurren " + animales.length() + " animales, aquí te van.");
 
         // Mostrar el primer animal en la lista
         if (currentAnimalNode != null) {
             animalLabel.setText(currentAnimalNode.getContent());
+            Image image = new Image(getClass().getResourceAsStream("/imgAnimales/" + currentAnimalNode.getContent().toLowerCase() +  ".jpg"));
+            animalImageView.setImage(image);
+            animalImageBox.setVisible(true);
         }
 
         // Configurar la visibilidad de los botones
@@ -200,6 +211,7 @@ public class PreguntasController implements Initializable {
         noButton.setVisible(false);
         prevButton.setVisible(true);
         nextButton.setVisible(true);
+
     }
     
     private void mostrarAnimalAnterior() {
@@ -207,6 +219,8 @@ public class PreguntasController implements Initializable {
         if (currentAnimalNode != null) {
             currentAnimalNode = animales.getPrevious(currentAnimalNode);
             animalLabel.setText(currentAnimalNode.getContent());
+            Image image = new Image(getClass().getResourceAsStream("/imgAnimales/" + currentAnimalNode.getContent().toLowerCase() +  ".jpg"));
+            animalImageView.setImage(image);
         }
     }
 
@@ -216,6 +230,8 @@ public class PreguntasController implements Initializable {
         if (currentAnimalNode != null) {
             currentAnimalNode = animales.getNext(currentAnimalNode);
             animalLabel.setText(currentAnimalNode.getContent());
+            Image image = new Image(getClass().getResourceAsStream("/imgAnimales/" + currentAnimalNode.getContent().toLowerCase() +  ".jpg"));
+            animalImageView.setImage(image);
         }
     }
 
