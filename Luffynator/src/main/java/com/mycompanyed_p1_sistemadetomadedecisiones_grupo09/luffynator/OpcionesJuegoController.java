@@ -49,6 +49,8 @@ public class OpcionesJuegoController implements Initializable {
     public void jugar() throws IOException {
         String numPreguntasText = numPreguntasTF.getText();
         int numPreguntas;
+
+        // Validar el número de preguntas ingresado por el usuario
         try {
             numPreguntas = Integer.parseInt(numPreguntasText);
             if (numPreguntas < 0 || numPreguntas > 20) {
@@ -59,20 +61,27 @@ public class OpcionesJuegoController implements Initializable {
             return;
         }
 
-        // Configura el número de preguntas en GameManager
+        // Configurar el número de preguntas en GameManager
         GameManager.getInstance().setNumPreguntas(numPreguntas);
 
-       // Cargar los datos del juego
-       GameManager.getInstance().loadGameData("src/main/java/archivos/ArchivoPreguntas.csv", "src/main/java/archivos/ArchivoRespuestas.csv");
+        // Obtener las rutas de archivo seleccionadas por el usuario
+        String preguntasFilePath = GameManager.getInstance().getPreguntasFilePath();
+        String respuestasFilePath = GameManager.getInstance().getRespuestasFilePath();
 
+        // Cargar los datos del juego usando las rutas seleccionadas
+        GameManager.getInstance().loadGameData(preguntasFilePath, respuestasFilePath);
+
+        // Cargar la pantalla de carga
         FXMLLoader loader = new FXMLLoader(getClass().getResource("loadingScreen.fxml"));
         Parent loadingRoot = loader.load();
         Scene currentScene = App.getPrimaryStage().getScene();
         currentScene.setRoot(loadingRoot);
 
+        // Crear una tarea para simular la carga
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
+                // Simular la carga con un tiempo de espera
                 Thread.sleep(2000);
                 return null;
             }
@@ -80,6 +89,7 @@ public class OpcionesJuegoController implements Initializable {
             @Override
             protected void succeeded() {
                 try {
+                    // Una vez finalizada la "carga", cambiar a la pantalla de preguntas
                     App.setRoot("preguntas");
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -87,9 +97,9 @@ public class OpcionesJuegoController implements Initializable {
             }
         };
 
+        // Iniciar la tarea en un nuevo hilo
         new Thread(task).start();
-    }
-    
+    }    
     private void mostrarAlertaError(String titulo, String mensaje) {
         Alert alerta = new Alert(AlertType.ERROR, mensaje, ButtonType.OK);
         alerta.setTitle(titulo);

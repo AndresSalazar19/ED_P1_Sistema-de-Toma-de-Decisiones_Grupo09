@@ -8,7 +8,6 @@ package tda;
  *
  * @author asala
  */
-
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -29,15 +28,16 @@ public class CircularDoublyLinkedList {
         }
     }
 
-        public Node getNext(Node currentNode) {
+     public Node getNext(Node currentNode) {
         if (currentNode == null) {
             return null;
         }
         return currentNode.next;
     }
-        public Node getHead(){
-            return head;
-        }
+     
+    public Node getHead(){
+        return head;
+    }
         
     public Node getPrevious(Node currentNode) {
         if (currentNode == null) {
@@ -66,13 +66,14 @@ public class CircularDoublyLinkedList {
         System.out.println("OBTENIENDO ANIMALES");
 
         if (tree == null || tree.getRoot() == null) {
-            System.out.println("ES NULLLLLL");
+            System.out.println("La lista de preguntas o respuestas está vacía");
             return listaAnimales;
         }
 
         Queue<NodeDecisionTree> queue = new LinkedList<>();
         System.out.println("ME ARRECHO" + tree.getRoot().getContent());
         queue.add(tree.getRoot());
+        
         int count = 1;
 
         while (!queue.isEmpty()) {
@@ -114,5 +115,10 @@ public class CircularDoublyLinkedList {
 
         return length;
     }
+
+    public boolean isEmpty() {
+        return head == null;
+    }
+
 
 }
