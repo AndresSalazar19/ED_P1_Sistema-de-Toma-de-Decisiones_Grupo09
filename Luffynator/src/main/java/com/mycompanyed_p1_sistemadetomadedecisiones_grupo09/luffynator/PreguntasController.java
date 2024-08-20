@@ -5,6 +5,9 @@
 package com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator;
 
 import java.io.File;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import tda.*;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -28,6 +31,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import static tda.CircularDoublyLinkedList.obtenerListaAnimales;
 
@@ -312,8 +316,27 @@ public class PreguntasController implements Initializable {
 
         String lineaCSV = String.join(",", caminoConComillas);
 
-        try (FileWriter writer = new FileWriter("src/main/java/archivos/ArchivoRespuestas.csv", true)) {
-            writer.write("\n" + lineaCSV);
+        String respuestasFilePath = GameManager.getInstance().getRespuestasFilePath();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(respuestasFilePath))) {
+            StringBuilder contenido = new StringBuilder();
+            String linea;
+
+            // Leer el contenido del archivo y eliminar líneas vacías
+            while ((linea = reader.readLine()) != null) {
+                if (!linea.trim().isEmpty()) {
+                    contenido.append(linea).append(System.lineSeparator());
+                }
+            }
+
+            // Añadir la nueva línea al contenido
+            contenido.append(lineaCSV);
+
+            // Escribir todo el contenido de nuevo en el archivo
+            try (FileWriter writer = new FileWriter(respuestasFilePath)) {
+                writer.write(contenido.toString());
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

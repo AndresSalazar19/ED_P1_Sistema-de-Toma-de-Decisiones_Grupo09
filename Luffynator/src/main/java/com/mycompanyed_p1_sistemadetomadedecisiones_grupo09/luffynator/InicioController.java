@@ -4,6 +4,7 @@
  */
 package com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
 /**
@@ -45,5 +48,40 @@ public class InicioController implements Initializable {
         
 
     }
+    
+        
+    @FXML
+    private void cambiarArchivoPreguntas() throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+        Stage stage = App.getPrimaryStage(); // Asegúrate de tener acceso al primaryStage
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if (selectedFile != null) {
+            String currentPreguntasFilePath = selectedFile.getAbsolutePath();
+            System.out.println("Archivo de preguntas seleccionado: " + currentPreguntasFilePath);
+
+            // Actualiza el archivo de preguntas en GameManager
+            GameManager.getInstance().loadGameData(currentPreguntasFilePath, GameManager.getInstance().getRespuestasFilePath());
+        }
+    }
+
+    @FXML
+    private void cambiarArchivoRespuestas() throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+        Stage stage = App.getPrimaryStage(); // Asegúrate de tener acceso al primaryStage
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if (selectedFile != null) {
+            String currentRespuestasFilePath = selectedFile.getAbsolutePath();
+            System.out.println("Archivo de respuestas seleccionado: " + currentRespuestasFilePath);
+
+            // Actualiza el archivo de respuestas en GameManager
+            GameManager.getInstance().loadGameData(GameManager.getInstance().getPreguntasFilePath(), currentRespuestasFilePath);
+        }
+    }
+
+
    
 }
