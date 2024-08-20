@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="loadingPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator.LoadingScreenController">
+    <stylesheets>
+        <URL value="@/styles/loadingScreen.css" />
+    </stylesheets>
+    <children>
+      <ProgressIndicator fx:id="progressIndicator" layoutX="198.0" layoutY="189.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="176.0" prefWidth="382.0" progress="0.0" />
+      <Text fx:id="loadingText" layoutX="357.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cargando" />    </children>
+</AnchorPane>

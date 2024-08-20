@@ -1,0 +1,81 @@
+/* Estilo principal */
+.mainFxmlClass {
+    -fx-background-color: linear-gradient(to bottom, #87CEEB, #00BFFF); /* Gradiente para el fondo */
+    -fx-background-image: url("/imagenes/OPbackground.jpg"); /* Ruta de la imagen de fondo */
+    -fx-background-size: cover; /* Asegura que la imagen cubra todo el fondo */
+    -fx-background-position: center center; /* Centra la imagen en el Pane */
+    -fx-background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+/* Estilo del cuadro de diálogo */
+.dialog-box {
+    -fx-background-color: #E0E0E0; /* Color de fondo del cuadro */
+    -fx-background-radius: 10; /* Bordes redondeados */
+    -fx-padding: 10px; /* Espaciado interior */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, 2, 2); /* Sombra al cuadro */
+}
+
+/* Estilo del label de preguntas */
+.pregunta-label {
+    -fx-text-fill: #2C3E50; /* Color del texto */
+    -fx-font-family: "Arial Bold"; /* Usa la misma fuente que el título */
+    -fx-font-size: 18px; /* Ajusta el tamaño de la fuente */
+    -fx-wrap-text: true; /* Permite que el texto se ajuste dentro del cuadro */
+}
+
+/* Estilo del label de animales */
+.animal-label {
+    -fx-text-fill: white; /* Color del texto */
+    -fx-font-family: "Arial"; /* Fuente */
+    -fx-font-size: 22px; /* Tamaño de la fuente */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 2, 0, 1, 1); /* Sombra ligera */
+}
+
+/* Estilo de la caja texturizada para la imagen del animal */
+.animal-image-box {
+    -fx-background-color: #D3D3D3; /* Color de fondo de la caja */
+    -fx-background-radius: 10; /* Bordes redondeados */
+    -fx-padding: 10px; /* Espaciado interior */
+    -fx-border-color: #A9A9A9; /* Color del borde */
+    -fx-border-width: 2px;
+    -fx-background-image: url("/imagenes/texture.png"); /* Textura de fondo */
+    -fx-background-size: cover; /* Asegura que la textura cubra toda la caja */
+    -fx-background-position: center center; /* Centra la textura */
+    -fx-background-repeat: no-repeat; /* Evita que la textura se repita */
+}
+
+/* Estilo general para todos los botones */
+.button-general {
+    -fx-background-color: #FFA500;
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-size: 24px;
+    -fx-background-radius: 10;
+    -fx-cursor: hand; /* Cambia el cursor al pasar sobre el botón */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 2, 2); /* Sombra al botón */
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+.button-general:hover {
+    -fx-background-color: #FF8C00; /* Cambia de color al pasar el ratón */
+    -fx-scale-x: 1.1; /* Agranda el botón al pasar el ratón */
+    -fx-scale-y: 1.1;
+}
+
+/* Estilo para el botón de agregar animal */
+.add-animal-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-size: 20px;
+    -fx-background-radius: 10;
+    -fx-cursor: hand; /* Cambia el cursor al pasar sobre el botón */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 2, 2); /* Sombra al botón */
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+.add-animal-button:hover {
+    -fx-background-color: #45A049; /* Cambia de color al pasar el ratón */
+    -fx-scale-x: 1.1; /* Agranda el botón al pasar el ratón */
+    -fx-scale-y: 1.1;
+}

@@ -1,0 +1,17 @@
+
+/* Estilo principal */
+.mainFxmlClass {
+    -fx-background-color: linear-gradient(to bottom, #87CEEB, #00BFFF); /* Gradiente para el fondo */
+}
+
+
+#progressIndicator {
+    -fx-progress-color: #9370DB; /* Púrpura medio para representar la Gomu Gomu no Mi */
+    -fx-accent: #9370DB;
+    -fx-background-insets: 0;
+    -fx-padding: 10;
+    -fx-border-color: #9370DB;
+    -fx-border-width: 2;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+}

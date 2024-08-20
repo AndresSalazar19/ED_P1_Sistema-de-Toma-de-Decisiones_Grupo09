@@ -40,8 +40,10 @@ public class InicioController implements Initializable {
         play("music/One Piece OST - Nakama no Shirushi da! Sign Of Friendship.mp3");
         
                 // Carga la imagen desde los recursos
-        Image image = new Image(getClass().getResourceAsStream("/imagenes/Inicio Luffy.png"));
+        Image image = new Image(getClass().getResourceAsStream("/imagenes/InicioLuffy.png"));
         luffyInicio.setImage(image);
+        
+
     }
    
 }
