@@ -95,6 +95,32 @@ public class GameManager {
         }
         return lineas;
     }
+    
+    public static boolean esFormatoValido(List<String> lineasPreguntas, List<String> lineasRespuestas) {
+        // Validación del archivo de preguntas
+        for (String pregunta : lineasPreguntas) {
+            if (pregunta == null || pregunta.trim().isEmpty()) {
+                return false; // Si hay una línea vacía o nula, formato inválido
+            }
+        }
+
+        // Validación del archivo de respuestas
+        for (String respuesta : lineasRespuestas) {
+            String[] partes = respuesta.split(",");
+            if (partes.length < 2) {
+                return false; // Debe haber al menos un animal y una respuesta
+            }
+
+            // Verificamos que las respuestas sean "si" o "no"
+            for (int i = 1; i < partes.length; i++) {
+                if (!partes[i].trim().equalsIgnoreCase("si") && !partes[i].trim().equalsIgnoreCase("no")) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
 
 
 
