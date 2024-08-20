@@ -22,6 +22,8 @@ public class GameManager {
     private static GameManager instance;
     private int numPreguntas;
     private DecisionTree decisionTree;
+    private String preguntasFilePath = "src/main/java/archivos/ArchivoPreguntas.csv";
+    private String respuestasFilePath = "src/main/java/archivos/ArchivoRespuestas.csv";
 
     private GameManager() {}
 
@@ -47,8 +49,26 @@ public class GameManager {
     public void setDecisionTree(DecisionTree decisionTree) {
         this.decisionTree = decisionTree;
     }
+    
+    public String getPreguntasFilePath() {
+        return preguntasFilePath;
+    }
+
+    public String getRespuestasFilePath() {
+        return respuestasFilePath;
+    }
+    
+    public void setPreguntasFilePath(String preguntasFilePath) {
+        this.preguntasFilePath = preguntasFilePath;
+    }
+
+    public void setRespuestasFilePath(String respuestasFilePath) {
+        this.respuestasFilePath = respuestasFilePath;
+    }
 
     public void loadGameData(String preguntasFilePath, String respuestasFilePath) throws IOException {
+        this.preguntasFilePath = preguntasFilePath;
+        this.respuestasFilePath = respuestasFilePath;
         List<String> preguntas = readFile(preguntasFilePath);
         List<String> respuestas = readFile(respuestasFilePath);
         decisionTree = buildDecisionTree(preguntas, respuestas);

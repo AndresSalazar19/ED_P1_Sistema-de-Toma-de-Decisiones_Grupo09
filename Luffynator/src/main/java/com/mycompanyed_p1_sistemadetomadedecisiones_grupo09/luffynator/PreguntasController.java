@@ -4,6 +4,7 @@
  */
 package com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator;
 
+import java.io.File;
 import tda.*;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,6 +19,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import static tda.CircularDoublyLinkedList.obtenerListaAnimales;
 
 
@@ -232,7 +235,6 @@ public class PreguntasController implements Initializable {
 
         caminoActual.clear();
     }
-
 
     @FXML
     private void volver() {
