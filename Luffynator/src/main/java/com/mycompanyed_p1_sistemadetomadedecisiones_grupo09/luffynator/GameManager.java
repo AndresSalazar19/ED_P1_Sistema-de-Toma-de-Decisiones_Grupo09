@@ -54,7 +54,6 @@ public class GameManager {
         decisionTree = buildDecisionTree(preguntas, respuestas);
         
         CircularDoublyLinkedList animales = obtenerListaAnimales(decisionTree);
-        System.out.println("UNPREDITABLKE");
         animales.display();
     }
 

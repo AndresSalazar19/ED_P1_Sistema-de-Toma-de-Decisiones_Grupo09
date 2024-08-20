@@ -4,23 +4,31 @@
  */
 package com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator;
 
+import java.io.File;
 import tda.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import static tda.CircularDoublyLinkedList.obtenerListaAnimales;
 
 
@@ -164,46 +172,76 @@ public class PreguntasController implements Initializable {
 
 
     private void insertNewAnimalInNullNode(boolean isLeft) {
-        // Preguntar al usuario cuál era el animal en el que estaba pensando
-        TextInputDialog animalDialog = new TextInputDialog();
-        animalDialog.setTitle("Nuevo Animal");
-        animalDialog.setHeaderText("No conozco ese animal.");
-        animalDialog.setContentText("¿En qué animal estabas pensando?");
-        Optional<String> nuevoAnimal = animalDialog.showAndWait();
+        try {
+            // Cargar la vista del diálogo para agregar animal
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AgregarAnimal.fxml"));
+            Parent root = loader.load();
 
-        if (nuevoAnimal.isPresent()) {
-            String animal = nuevoAnimal.get();
+            // Obtener el controlador de la vista cargada
+            AgregarAnimalController controller = loader.getController();
 
-            // Crear un nuevo nodo con el animal y asignarlo al lado correspondiente
-            if (isLeft) {
-                currentNode.setYesBranch(new DecisionTree(new NodeDecisionTree(animal)));
+            // Mostrar la ventana de diálogo
+            Stage stage = new Stage();
+            stage.setTitle("Agregar Nuevo Animal");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            // Obtener los datos ingresados en el diálogo
+            Optional<String> nuevoAnimal = controller.getAnimalName();
+            Optional<File> imagenArchivo = controller.getSelectedImageFile();
+
+            // Verificar que se haya ingresado un nombre y seleccionado una imagen
+            if (nuevoAnimal.isPresent() && imagenArchivo.isPresent()) {
+                String animalName = nuevoAnimal.get();
+                File selectedImageFile = imagenArchivo.get();
+
+                // Crear un nuevo nodo con el nombre del animal y asignarlo al lado correspondiente
+                if (isLeft) {
+                    currentNode.setYesBranch(new DecisionTree(new NodeDecisionTree(animalName)));
+                } else {
+                    currentNode.setNoBranch(new DecisionTree(new NodeDecisionTree(animalName)));
+                }
+
+                // Guardar la imagen con el nombre del animal
+                String destFileName = animalName.toLowerCase() + ".jpg";
+                File destFile = new File("src/main/resources/imgAnimales/" + destFileName);
+                Files.copy(selectedImageFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                // Informar al usuario que el árbol ha sido actualizado
+                preguntaLabel.setText("¡Gracias! He aprendido sobre " + animalName + "!");
+                siButton.setDisable(true);
+                noButton.setDisable(true);
+
+                // Actualizar el archivo de respuestas
+                escribirNuevoAnimalEnArchivo(animalName);
             } else {
-                currentNode.setNoBranch(new DecisionTree(new NodeDecisionTree(animal)));
+                System.out.println("No se ingresó un nombre o no se seleccionó una imagen.");
             }
-
-            // Informar al usuario que el árbol ha sido actualizado
-            preguntaLabel.setText("¡Gracias! He aprendido sobre " + animal + "!");
-            siButton.setDisable(true);
-            noButton.setDisable(true);
-
-            // Actualizar el archivo de respuestas
-            escribirNuevoAnimalEnArchivo(animal);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    
-    private void mostrarListaAnimales() {
+        private void mostrarListaAnimales() {
         DecisionTree arbolActual = GameManager.getInstance().getDecisionTree();
-        animales = obtenerListaAnimales(arbolActual); // Aquí se asegura la asignación correcta a la variable de clase
+        animales = obtenerListaAnimales(arbolActual); // Asegurarse de que la variable de clase esté correctamente asignada
         currentAnimalNode = animales.getHead(); // Obtener el primer nodo para inicializar la navegación
         preguntaLabel.setText("Se me ocurren " + animales.length() + " animales, aquí te van.");
 
         // Mostrar el primer animal en la lista
         if (currentAnimalNode != null) {
             animalLabel.setText(currentAnimalNode.getContent());
-            Image image = new Image(getClass().getResourceAsStream("/imgAnimales/" + currentAnimalNode.getContent().toLowerCase() +  ".jpg"));
-            animalImageView.setImage(image);
-            animalImageBox.setVisible(true);
+            String imagePath = "src/main/resources/imgAnimales/" + currentAnimalNode.getContent().toLowerCase() + ".jpg";
+            File imageFile = new File(imagePath);
+
+            if (imageFile.exists()) {
+                Image image = new Image(imageFile.toURI().toString());
+                animalImageView.setImage(image);
+                animalImageBox.setVisible(true);
+            } else {
+                System.out.println("Imagen no encontrada: " + imagePath);
+                animalImageView.setImage(null); // Limpia la vista si no se encuentra la imagen
+            }
         }
 
         // Configurar la visibilidad de los botones
@@ -211,7 +249,6 @@ public class PreguntasController implements Initializable {
         noButton.setVisible(false);
         prevButton.setVisible(true);
         nextButton.setVisible(true);
-
     }
     
     private void mostrarAnimalAnterior() {
@@ -219,8 +256,16 @@ public class PreguntasController implements Initializable {
         if (currentAnimalNode != null) {
             currentAnimalNode = animales.getPrevious(currentAnimalNode);
             animalLabel.setText(currentAnimalNode.getContent());
-            Image image = new Image(getClass().getResourceAsStream("/imgAnimales/" + currentAnimalNode.getContent().toLowerCase() +  ".jpg"));
-            animalImageView.setImage(image);
+            String imagePath = "src/main/resources/imgAnimales/" + currentAnimalNode.getContent().toLowerCase() + ".jpg";
+            File imageFile = new File(imagePath);
+
+            if (imageFile.exists()) {
+                Image image = new Image(imageFile.toURI().toString());
+                animalImageView.setImage(image);
+            } else {
+                System.out.println("Imagen no encontrada: " + imagePath);
+                animalImageView.setImage(null); // Limpia la vista si no se encuentra la imagen
+            }
         }
     }
 
@@ -230,15 +275,23 @@ public class PreguntasController implements Initializable {
         if (currentAnimalNode != null) {
             currentAnimalNode = animales.getNext(currentAnimalNode);
             animalLabel.setText(currentAnimalNode.getContent());
-            Image image = new Image(getClass().getResourceAsStream("/imgAnimales/" + currentAnimalNode.getContent().toLowerCase() +  ".jpg"));
-            animalImageView.setImage(image);
+            String imagePath = "src/main/resources/imgAnimales/" + currentAnimalNode.getContent().toLowerCase() + ".jpg";
+            File imageFile = new File(imagePath);
+
+            if (imageFile.exists()) {
+                Image image = new Image(imageFile.toURI().toString());
+                animalImageView.setImage(image);
+            } else {
+                System.out.println("Imagen no encontrada: " + imagePath);
+                animalImageView.setImage(null); // Opcional: Limpia la vista si no se encuentra la imagen
+            }
         }
     }
 
 
-    private void escribirNuevoAnimalEnArchivo(String nuevoAnimal) {
+    private void escribirNuevoAnimalEnArchivo(String nuevoAnimal) throws IOException {
         LinkedList<String> caminoConComillas = new LinkedList<>(caminoActual);
-        caminoConComillas.addFirst("\"" + nuevoAnimal + "\"");
+        caminoConComillas.addFirst(nuevoAnimal);
 
         String lineaCSV = String.join(",", caminoConComillas);
 
@@ -247,7 +300,6 @@ public class PreguntasController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         caminoActual.clear();
     }
 
