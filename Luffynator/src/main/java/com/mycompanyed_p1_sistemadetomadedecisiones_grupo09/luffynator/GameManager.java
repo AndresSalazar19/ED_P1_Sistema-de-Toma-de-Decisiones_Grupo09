@@ -82,13 +82,10 @@ public class GameManager {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                // Elimina comillas dobles al principio y al final de la línea si existen
                 linea = linea.replaceAll("^\"|\"$", "");
 
-                // Elimina los puntos y comas al final de la línea si existen
                 linea = linea.replaceAll("[;]+$", "");
 
-                // Añade la línea procesada a la lista
                 lineas.add(linea);
             }
         }
@@ -105,7 +102,7 @@ public class GameManager {
         // Recorremos cada respuesta para construir el árbol
         for (String answer : answers) {
             String[] sepAnswer = answer.split(",");
-            String element = sepAnswer[0]; // El animal (e.g., "gato")
+            String element = sepAnswer[0];
 
             NodeDecisionTree current = decisionTree.getRoot();
 
