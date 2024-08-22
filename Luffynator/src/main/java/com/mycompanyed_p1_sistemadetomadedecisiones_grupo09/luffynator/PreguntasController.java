@@ -133,10 +133,7 @@ public class PreguntasController implements Initializable {
                 currentNode = siguienteNodo;
 
                 if (currentNode.getYesBranch() == null && currentNode.getNoBranch() == null) {
-                    // Si llegamos a una hoja, preguntar si es el animal correcto
-                    preguntaLabel.setText("¿Es " + currentNode.getContent() + " el animal en el que estabas pensando?");
-                    siButton.setOnAction(e -> manejarRespuestaFinal(true));
-                    noButton.setOnAction(e -> manejarRespuestaFinal(false));
+                    finalizarJuego(siguienteNodo);
                 } else {
                     // Continuar con la siguiente pregunta
                     preguntaLabel.setText(currentNode.getContent());
@@ -154,10 +151,12 @@ public class PreguntasController implements Initializable {
             agregarAnimalButton.setOnAction(e -> insertNewAnimalInNullNode(true)); // Opción a agregar un nuevo animal
         } else if (ultimoNodo.getYesBranch() == null && ultimoNodo.getNoBranch() == null) {
             // Existe un único animal
-            preguntaLabel.setText("¡Gracias! El animal es " + ultimoNodo.getContent() + "!");
+            preguntaLabel.setText("¡Adiviné! El animal es " + ultimoNodo.getContent() + "!");
             // Mostrar el primer animal en la lista
+            
             animalLabel.setText(ultimoNodo.getContent());
-
+            animalLabel.setVisible(true);
+            
             String imagePath = "src/main/resources/imgAnimales/" + ultimoNodo.getContent().toLowerCase() + ".jpg";
             File imageFile = new File(imagePath);
 
@@ -183,7 +182,7 @@ public class PreguntasController implements Initializable {
 
     private void manejarRespuestaFinal(boolean esCorrecto) {
         if (esCorrecto) {
-            preguntaLabel.setText("¡Gracias! ¡El animal es " + currentNode.getContent() + "!");
+            preguntaLabel.setText("¡JA!¡Adiviné! ¡El animal es " + currentNode.getContent() + "!");
         } else {
             insertNewAnimalInNullNode(false);
         }
@@ -248,6 +247,7 @@ public class PreguntasController implements Initializable {
         animales = obtenerListaAnimales(arbolActual); // Asegurarse de que la variable de clase esté correctamente asignada
         currentAnimalNode = animales.getHead(); // Obtener el primer nodo para inicializar la navegación
         preguntaLabel.setText("Se me ocurren " + animales.length() + " animales, aquí te van.");
+        animalLabel.setVisible(true);
 
         // Mostrar el primer animal en la lista
         if (currentAnimalNode != null) {

@@ -34,7 +34,7 @@
             </children>
         </VBox>
         <!-- Etiqueta de Animal -->
-        <Label fx:id="animalLabel" layoutX="362.0" layoutY="248.0" styleClass="animal-label" text="Animal" />
+        <Label fx:id="animalLabel" layoutX="362.0" layoutY="248.0" styleClass="animal-label" text="Animal" visible="false" />
 
         <!-- Botón Agregar Animal -->
         <Button fx:id="agregarAnimalButton" layoutX="331.0" layoutY="400.0" mnemonicParsing="false" styleClass="add-animal-button" text="Agregar Animal" visible="false" />
