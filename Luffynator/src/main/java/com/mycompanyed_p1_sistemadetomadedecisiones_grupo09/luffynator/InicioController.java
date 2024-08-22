@@ -37,7 +37,11 @@ public class InicioController implements Initializable {
         App.setRoot("opcionesJuego");
     }
 
-
+    @FXML
+    public void configuracion() throws IOException{
+        System.out.println("Comenzando....");
+        App.setRoot("configuracion");
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         play("music/One Piece OST - Nakama no Shirushi da! Sign Of Friendship.mp3");
@@ -45,7 +49,15 @@ public class InicioController implements Initializable {
                 // Carga la imagen desde los recursos
         Image image = new Image(getClass().getResourceAsStream("/imagenes/InicioLuffy.png"));
         luffyInicio.setImage(image);
+        String preguntasFilePath = GameManager.getInstance().getPreguntasFilePath();
+        String respuestasFilePath = GameManager.getInstance().getRespuestasFilePath();
         
+        try {
+            GameManager.getInstance().loadGameData(preguntasFilePath, respuestasFilePath);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
 
     }
     

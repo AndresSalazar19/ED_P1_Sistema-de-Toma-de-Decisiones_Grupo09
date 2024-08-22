@@ -28,7 +28,7 @@ public class LoadingScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        loadingScreen = new LoadingScreen(progressIndicator, loadingText);
+        loadingScreen = new LoadingScreen(progressIndicator);
         startProgress(); // Inicia el progreso automáticamente
     }
 
@@ -49,11 +49,9 @@ public class LoadingScreenController implements Initializable {
     public class LoadingScreen implements Runnable {
 
         private ProgressIndicator progressIndicator;
-        private Text loadingText;
 
-        public LoadingScreen(ProgressIndicator progressIndicator, Text loadingText) {
+        public LoadingScreen(ProgressIndicator progressIndicator) {
             this.progressIndicator = progressIndicator;
-            this.loadingText = loadingText;
         }
 
         @Override
@@ -66,7 +64,6 @@ public class LoadingScreenController implements Initializable {
                     e.printStackTrace();
                 }
             }
-            Platform.runLater(() -> loadingText.setText("Éxito"));
         }
     }
 }

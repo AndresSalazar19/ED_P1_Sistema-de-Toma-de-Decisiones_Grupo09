@@ -17,6 +17,7 @@
     <Button fx:id="ComenzarButton" layoutX="301.0" layoutY="514.0" onAction="#comenzar" styleClass="button-general" text="Comenzar" />
       <Button fx:id="archPreguntas" layoutX="44.0" layoutY="44.0" mnemonicParsing="false" onAction="#cambiarArchivoPreguntas" styleClass="button-general" text="Cargar Archivo Preguntas" />
       <Button fx:id="archResp" layoutX="448.0" layoutY="44.0" mnemonicParsing="false" onAction="#cambiarArchivoRespuestas" styleClass="button-general" text="Cargar Archivo Respuestas" />
+      <Button fx:id="OpcionesButton" layoutX="144.0" layoutY="514.0" onAction="#configuracion" styleClass="button-general" text="Opciones" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
