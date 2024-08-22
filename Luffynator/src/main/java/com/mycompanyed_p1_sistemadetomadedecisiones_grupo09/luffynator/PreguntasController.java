@@ -133,10 +133,8 @@ public class PreguntasController implements Initializable {
                 currentNode = siguienteNodo;
 
                 if (currentNode.getYesBranch() == null && currentNode.getNoBranch() == null) {
-                    // Si llegamos a una hoja, preguntar si es el animal correcto
-                    preguntaLabel.setText("¿Es " + currentNode.getContent() + " el animal en el que estabas pensando?");
-                    siButton.setOnAction(e -> manejarRespuestaFinal(true));
-                    noButton.setOnAction(e -> manejarRespuestaFinal(false));
+                    // Si llegamos a una hoja, finalizarJuego
+                    finalizarJuego(siguienteNodo);
                 } else {
                     // Continuar con la siguiente pregunta
                     preguntaLabel.setText(currentNode.getContent());
@@ -147,49 +145,41 @@ public class PreguntasController implements Initializable {
         }
     }
 
+
     private void finalizarJuego(NodeDecisionTree ultimoNodo) {
         if (ultimoNodo == null) {
             agregarAnimalButton.setVisible(true);
-            // No existe un animal en el árbol para este camino
-            agregarAnimalButton.setOnAction(e -> insertNewAnimalInNullNode(true)); // Opción a agregar un nuevo animal
+            agregarAnimalButton.setOnAction(e -> insertNewAnimalInNullNode(true));
         } else if (ultimoNodo.getYesBranch() == null && ultimoNodo.getNoBranch() == null) {
-            // Existe un único animal
-            preguntaLabel.setText("¡Gracias! El animal es " + ultimoNodo.getContent() + "!");
-            // Mostrar el primer animal en la lista
+            preguntaLabel.setText("¡Adiviné! El animal es " + ultimoNodo.getContent() + "!");
+            
             animalLabel.setText(ultimoNodo.getContent());
-
             String imagePath = "src/main/resources/imgAnimales/" + ultimoNodo.getContent().toLowerCase() + ".jpg";
             File imageFile = new File(imagePath);
 
             if (imageFile.exists()) {
                 Image image = new Image(imageFile.toURI().toString());
+                animalImageBox.setVisible(true);
+                siButton.setVisible(false);
+                noButton.setVisible(false);
+                animalLabel.setVisible(true);
+                animalImageView.setImage(image);
+            } else {
+                File unknownImageFile = new File("src/main/resources/imgAnimales/unknown.jpg");
+                Image image = new Image(unknownImageFile.toURI().toString());
                 animalImageView.setImage(image);
                 animalImageBox.setVisible(true);
-            } else {
-                System.out.println("Imagen no encontrada: " + imagePath);
-                animalImageView.setImage(null); // Limpia la vista si no se encuentra la imagen
+                siButton.setVisible(false);
+                noButton.setVisible(false);
+                animalLabel.setVisible(true);
+                animalImageView.setImage(image);
             }
-            
-            // Configurar la visibilidad de los botones
-            siButton.setDisable(true);
-            noButton.setDisable(true);
-            
         } else {
-            // Existen varios animales, mostrar la lista de animales
             mostrarListaAnimales();
         }
     }
 
 
-    private void manejarRespuestaFinal(boolean esCorrecto) {
-        if (esCorrecto) {
-            preguntaLabel.setText("¡Gracias! ¡El animal es " + currentNode.getContent() + "!");
-        } else {
-            insertNewAnimalInNullNode(false);
-        }
-        siButton.setDisable(true);
-        noButton.setDisable(true);
-    }
 
 
     private void insertNewAnimalInNullNode(boolean isLeft) {
@@ -243,13 +233,23 @@ public class PreguntasController implements Initializable {
         }
     }
 
-        private void mostrarListaAnimales() {
+    private void mostrarListaAnimales() {
+        
         DecisionTree arbolActual = GameManager.getInstance().getDecisionTree();
-        animales = obtenerListaAnimales(arbolActual); // Asegurarse de que la variable de clase esté correctamente asignada
-        currentAnimalNode = animales.getHead(); // Obtener el primer nodo para inicializar la navegación
+        animales = obtenerListaAnimales(arbolActual); 
+
+        if(animales.length() == 1){
+            finalizarJuego(arbolActual.getRoot());
+            return;  // Aquí, retornamos inmediatamente ya que no es necesario continuar.
+        }
+
+        currentAnimalNode = animales.getHead(); 
         preguntaLabel.setText("Se me ocurren " + animales.length() + " animales, aquí te van.");
 
-        // Mostrar el primer animal en la lista
+        mostrarAnimalActual();
+    }
+
+    private void mostrarAnimalActual() {
         if (currentAnimalNode != null) {
             animalLabel.setText(currentAnimalNode.getContent());
             String imagePath = "src/main/resources/imgAnimales/" + currentAnimalNode.getContent().toLowerCase() + ".jpg";
@@ -257,19 +257,18 @@ public class PreguntasController implements Initializable {
 
             if (imageFile.exists()) {
                 Image image = new Image(imageFile.toURI().toString());
-                animalImageView.setImage(image);
                 animalImageBox.setVisible(true);
+                siButton.setVisible(false);
+                noButton.setVisible(false);
+                prevButton.setVisible(true);
+                nextButton.setVisible(true);
+                animalLabel.setVisible(true);
+                animalImageView.setImage(image);
             } else {
                 System.out.println("Imagen no encontrada: " + imagePath);
-                animalImageView.setImage(null); // Limpia la vista si no se encuentra la imagen
+                animalImageView.setImage(null); 
             }
         }
-
-        // Configurar la visibilidad de los botones
-        siButton.setVisible(false);
-        noButton.setVisible(false);
-        prevButton.setVisible(true);
-        nextButton.setVisible(true);
     }
     
     private void mostrarAnimalAnterior() {
