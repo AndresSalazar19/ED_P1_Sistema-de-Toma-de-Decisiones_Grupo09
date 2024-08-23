@@ -15,7 +15,7 @@
         <Button fx:id="addImageButton" layoutX="190.0" layoutY="175.0" onAction="#handleAddImage" text="Seleccionar Imagen" />
         <ImageView fx:id="animalImageView" fitHeight="150" fitWidth="150" layoutX="203.0" layoutY="222.0" visible="false" />
         
-        <Button fx:id="saveButton" layoutX="456.0" layoutY="347.0" onAction="#handleSaveAnimal" text="Guardar Animal" />
-        <Button fx:id="cancelButton" layoutX="51.0" layoutY="347.0" onAction="#handleCancel" text="Cancelar" />
+        <Button fx:id="saveButton" layoutX="396.0" layoutY="314.0" onAction="#handleSaveAnimal" text="Guardar Animal" />
+        <Button fx:id="cancelButton" layoutX="71.0" layoutY="314.0" onAction="#handleCancel" text="Cancelar" />
     </children>
 </AnchorPane>
