@@ -178,7 +178,7 @@ public class InicioController implements Initializable {
             line = line.replace("\u00A0", " ");
 
             // Limpiar caracteres no deseados (e.g., eliminar BOM y otros), pero preservar los espacios entre palabras
-            line = line.replace("\uFEFF", "").replaceAll("[^\\p{ASCII}]", "").trim();
+            line = line.replace("\uFEFF", "").trim();
 
             // Verifica si la línea sigue el formato esperado de preguntas
             if (!line.trim().isEmpty() && isValidPreguntaFormat(line)) {
