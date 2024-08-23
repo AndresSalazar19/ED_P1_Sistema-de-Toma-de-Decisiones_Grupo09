@@ -82,13 +82,8 @@ public class GameManager {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                // Elimina comillas dobles al principio y al final de la línea si existen
-                linea = linea.replaceAll("^\"|\"$", "");
-
-                // Elimina los puntos y comas al final de la línea si existen
-                linea = linea.replaceAll("[;]+$", "");
-
-                // Añade la línea procesada a la lista
+                // Eliminar cualquier punto y coma adicional al final de cada línea
+                linea = linea.replaceAll(";+\\s*$", "");
                 lineas.add(linea);
             }
         }
