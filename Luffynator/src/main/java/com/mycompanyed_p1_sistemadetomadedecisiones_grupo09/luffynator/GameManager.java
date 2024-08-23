@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,7 +12,6 @@ import java.util.LinkedList;
 import java.util.List;
 import tda.*;
 import static tda.CircularDoublyLinkedList.obtenerListaAnimales;
-
 
 /**
  *
@@ -50,7 +50,7 @@ public class GameManager {
     public void setDecisionTree(DecisionTree decisionTree) {
         this.decisionTree = decisionTree;
     }
-    
+
     public String getPreguntasFilePath() {
         return preguntasFilePath;
     }
@@ -58,7 +58,7 @@ public class GameManager {
     public String getRespuestasFilePath() {
         return respuestasFilePath;
     }
-    
+
     public void setPreguntasFilePath(String preguntasFilePath) {
         this.preguntasFilePath = preguntasFilePath;
     }
@@ -96,9 +96,6 @@ public class GameManager {
         }
         return lineas;
     }
-
-
-
 
     public static DecisionTree buildDecisionTree(List<String> questions, List<String> answers) {
         DecisionTree decisionTree = new DecisionTree();
@@ -141,7 +138,5 @@ public class GameManager {
 
         return decisionTree;
     }
-
-
 
 }

@@ -44,16 +44,5 @@ public class DecisionTree {
         return this.root == null;
     }
 
-    public void updateTreeWithNewAnimal(NodeDecisionTree node, String newAnimal, String question, boolean isYes) {
-        String currentAnimal = node.getContent();
-        node.setContent(question);
-        if (isYes) {
-            node.setYesBranch(new DecisionTree(new NodeDecisionTree(newAnimal)));
-            node.setNoBranch(new DecisionTree(new NodeDecisionTree(currentAnimal)));
-        } else {
-            node.setNoBranch(new DecisionTree(new NodeDecisionTree(newAnimal)));
-            node.setYesBranch(new DecisionTree(new NodeDecisionTree(currentAnimal)));
-        }
-    }
 
 }

@@ -7,7 +7,6 @@ package tda;
 /**
  *
  * @author asala
- * @param <E>
  */
 public class NodeDecisionTree {
     private String content;

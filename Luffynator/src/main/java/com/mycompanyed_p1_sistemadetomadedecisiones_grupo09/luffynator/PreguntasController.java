@@ -253,6 +253,7 @@ public class PreguntasController implements Initializable {
 
         currentAnimalNode = animales.getHead(); 
         preguntaLabel.setText("Se me ocurren " + animales.length() + " animales, aquí te van.");
+        animalLabel.setVisible(true);
 
         mostrarAnimalActual();
     }
