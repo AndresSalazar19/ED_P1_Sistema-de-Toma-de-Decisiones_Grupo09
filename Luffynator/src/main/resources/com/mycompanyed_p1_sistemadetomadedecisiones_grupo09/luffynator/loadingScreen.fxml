@@ -9,5 +9,5 @@
         <URL value="@/styles/loadingScreen.css" />
     </stylesheets>
     <children>
-      <ProgressIndicator fx:id="progressIndicator" layoutX="198.0" layoutY="189.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="176.0" prefWidth="382.0" progress="0.0" />    </children>
+      <ProgressIndicator fx:id="progressIndicator" layoutX="306.0" layoutY="220.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="228.0" prefWidth="423.0" progress="0.0" />    </children>
 </AnchorPane>

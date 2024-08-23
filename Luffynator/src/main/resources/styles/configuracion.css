@@ -70,3 +70,7 @@
     -fx-background-color: #fb8c00; /* Cambio de color al pasar el cursor */
     -fx-cursor: hand; /* Cambiar cursor al pasar por encima */
 }
+
+#Volver{
+   -fx-alignment: center-right;
+}

@@ -13,31 +13,39 @@
         <URL value="@/styles/preguntas.css" />
     </stylesheets>
     <children>
+        <Button fx:id="volverButton" layoutX="45.0" layoutY="481.0" mnemonicParsing="false" onAction="#volver" styleClass="button-general" text="Volver" />
+        <!-- Botones de respuesta -->
+        <Button fx:id="siButton" layoutX="466.0" layoutY="106.0" mnemonicParsing="false" styleClass="button-general" text="Sí" />
+        <Button fx:id="noButton" layoutX="462.0" layoutY="198.0" mnemonicParsing="false" styleClass="button-general" text="No" />
+        <Button fx:id="prevButton" layoutX="152.0" layoutY="381.0" mnemonicParsing="false" styleClass="button-general" text="&lt;" visible="false" />
+        <Button fx:id="nextButton" layoutX="601.0" layoutY="381.0" mnemonicParsing="false" styleClass="button-general" text="&gt;" visible="false" />
+
+        <!-- Botón Agregar Animal -->
+        <Button fx:id="agregarAnimalButton" layoutX="331.0" layoutY="400.0" mnemonicParsing="false" styleClass="add-animal-button" text="Agregar Animal" visible="false" />
+      <ImageView fx:id="luffynatorImageView" fitHeight="219.0" fitWidth="259.0" layoutX="527.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true" />
+      <VBox layoutX="249.0" layoutY="284.0" prefHeight="195.0" prefWidth="302.0">
+         <children>
+            <VBox prefHeight="0.0" prefWidth="302.0">
+               <children>
+                    <!-- Etiqueta de Animal -->
+                    <Label fx:id="animalLabel" prefHeight="17.0" prefWidth="304.0" styleClass="animal-label" text="Animal" visible="false" />
+               </children>
+            </VBox>
+            
+              <!-- Caja texturizada para la imagen del animal -->
+              <VBox fx:id="animalImageBox" prefHeight="140.0" prefWidth="302.0" styleClass="animal-image-box" visible="false">
+               <children>
+                      <ImageView fx:id="animalImageView" fitHeight="202.0" fitWidth="302.0" preserveRatio="true" />
+               </children>
+              </VBox>
+         </children>
+      </VBox>
         <!-- Caja de Pregunta -->
         <!-- Contenedor para el cuadro de diálogo -->
-        <HBox fx:id="dialogBox" layoutX="245.0" layoutY="141.0" styleClass="dialog-box">
+        <HBox fx:id="dialogBox" layoutX="95.0" layoutY="158.0" styleClass="dialog-box">
          <children>
                <Label fx:id="preguntaLabel" styleClass="pregunta-label" text="Pregunta" />
          </children>
         </HBox>
-        <Button fx:id="volverButton" layoutX="45.0" layoutY="481.0" mnemonicParsing="false" onAction="#volver" styleClass="button-general" text="Volver" />
-        <!-- Botones de respuesta -->
-        <Button fx:id="siButton" layoutX="250" layoutY="200" mnemonicParsing="false" styleClass="button-general" text="Sí" />
-        <Button fx:id="noButton" layoutX="450" layoutY="200" mnemonicParsing="false" styleClass="button-general" text="No" />
-        <Button fx:id="prevButton" layoutX="84.0" layoutY="328.0" mnemonicParsing="false" styleClass="button-general" text="Prev" visible="false" />
-        <Button fx:id="nextButton" layoutX="565.0" layoutY="340.0" mnemonicParsing="false" styleClass="button-general" text="Next" visible="false" />
-      
-        <!-- Caja texturizada para la imagen del animal -->
-        <VBox fx:id="animalImageBox" layoutX="250.0" layoutY="233.0" prefHeight="200" prefWidth="300" styleClass="animal-image-box" visible="false">
-            <children>
-                <ImageView fx:id="animalImageView" fitHeight="180" fitWidth="280" preserveRatio="true" />
-            </children>
-        </VBox>
-        <!-- Etiqueta de Animal -->
-        <Label fx:id="animalLabel" layoutX="362.0" layoutY="248.0" styleClass="animal-label" text="Animal" visible="false" />
-
-        <!-- Botón Agregar Animal -->
-        <Button fx:id="agregarAnimalButton" layoutX="331.0" layoutY="400.0" mnemonicParsing="false" styleClass="add-animal-button" text="Agregar Animal" visible="false" />
-      <ImageView fx:id="luffynatorImageView" fitHeight="150.0" fitWidth="200.0" layoutX="23.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 </Pane>

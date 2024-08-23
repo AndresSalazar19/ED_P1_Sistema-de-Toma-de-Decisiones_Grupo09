@@ -23,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import tda.CircularDoublyLinkedList;
 import static tda.CircularDoublyLinkedList.obtenerListaAnimales;
 import tda.DecisionTree;
@@ -50,7 +51,7 @@ public class OpcionesJuegoController implements Initializable {
     private VBox animalImageBox;
     
     @FXML
-    private Label preguntaLabel;
+    private Text statsLabel;
     @FXML
     private Label animalLabel;
 
@@ -79,15 +80,16 @@ public class OpcionesJuegoController implements Initializable {
     public void jugar() throws IOException {
         String numPreguntasText = numPreguntasTF.getText();
         int numPreguntas;
+        int maxPreguntas = GameManager.getInstance().getNumPreguntas();
 
         // Validar el número de preguntas ingresado por el usuario
         try {
             numPreguntas = Integer.parseInt(numPreguntasText);
-            if (numPreguntas < 0 || numPreguntas > 20) {
-                throw new NumberFormatException("El número de preguntas debe estar entre 0 y 20.");
+            if (numPreguntas <= 0 || numPreguntas > maxPreguntas) {
+                throw new NumberFormatException("El número de preguntas debe estar entre 1 y " + String.valueOf(maxPreguntas) + ".");
             }
         } catch (NumberFormatException e) {
-            mostrarAlertaError("Número de Preguntas Inválido", "Por favor, ingrese un número de preguntas entre 0 y 20.");
+            mostrarAlertaError("Número de Preguntas Inválido", "Por favor, ingrese un número de preguntas entre 1 y " + String.valueOf(maxPreguntas) + ".");
             return;
         }
 
@@ -212,7 +214,10 @@ public class OpcionesJuegoController implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        int maxPreguntas = GameManager.getInstance().getNumPreguntas();
         
+        statsLabel.setText("Número de preguntas(entre 1 y " + String.valueOf(maxPreguntas) + "):");
+
         play("music/おれの最高地点.mp3");
                 
         Image image = new Image(getClass().getResourceAsStream("/imagenes/luffy amazed.png"));

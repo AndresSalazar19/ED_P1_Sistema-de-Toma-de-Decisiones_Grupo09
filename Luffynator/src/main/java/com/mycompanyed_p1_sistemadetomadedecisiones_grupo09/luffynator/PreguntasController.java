@@ -76,7 +76,7 @@ public class PreguntasController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         String imagePath = "src/main/resources/imagenes/InicioLuffy.png";
+         String imagePath = "src/main/resources/imagenes/luffychibi.png";
          File imageFile = new File(imagePath);
          Image image = new Image(imageFile.toURI().toString());
          luffynatorImageView.setImage(image);

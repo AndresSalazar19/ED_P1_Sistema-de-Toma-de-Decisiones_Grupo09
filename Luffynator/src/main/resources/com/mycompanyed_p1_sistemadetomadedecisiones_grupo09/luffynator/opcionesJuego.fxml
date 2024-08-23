@@ -17,7 +17,7 @@
         
         <!-- Campo de texto para el número de preguntas -->
         <TextField fx:id="numPreguntasTF" layoutX="332.0" layoutY="105.0" prefHeight="25.0" prefWidth="139.0" />
-        <Text fx:id="statsLabel" layoutX="57.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de preguntas:" />
+        <Text fx:id="statsLabel" layoutX="14.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de preguntas:" />
 
         <!-- Botón para volver -->
         <Button fx:id="volverButton" layoutX="57.0" layoutY="526.0" mnemonicParsing="false" onAction="#volver" prefWidth="105.0" styleClass="button-general" text="Volver" />

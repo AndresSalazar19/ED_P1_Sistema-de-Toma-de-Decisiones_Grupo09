@@ -87,6 +87,7 @@ public class GameManager {
         List<String> respuestas = readFile(respuestasFilePath);
         decisionTree = buildDecisionTree(preguntas, respuestas);
         this.listaPreguntas = preguntas;
+        this.numPreguntas = preguntas.size();
         CircularDoublyLinkedList animales = obtenerListaAnimales(decisionTree);
         animales.display();
     }
