@@ -57,7 +57,7 @@ public class CircularDoublyLinkedList {
             System.out.print(temp.data + " <-> ");
             temp = temp.next;
         } while (temp != head);
-        System.out.println(temp.data);  // Print the last element pointing to head
+        System.out.println(temp.data);  
     }
     
 

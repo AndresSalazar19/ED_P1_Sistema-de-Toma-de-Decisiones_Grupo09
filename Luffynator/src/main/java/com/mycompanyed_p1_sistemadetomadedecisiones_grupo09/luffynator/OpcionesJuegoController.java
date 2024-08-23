@@ -206,6 +206,13 @@ public class OpcionesJuegoController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        try {
+            GameManager.getInstance().loadGameData();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
         play("music/おれの最高地点.mp3");
                 
         Image image = new Image(getClass().getResourceAsStream("/imagenes/luffy amazed.png"));

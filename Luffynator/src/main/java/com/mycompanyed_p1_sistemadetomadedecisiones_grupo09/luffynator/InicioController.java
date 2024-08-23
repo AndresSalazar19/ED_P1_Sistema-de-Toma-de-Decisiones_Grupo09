@@ -12,15 +12,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -48,13 +43,11 @@ public class InicioController implements Initializable {
 
     @FXML
     public void comenzar() throws IOException {
-        System.out.println("Comenzando....");
         App.setRoot("opcionesJuego");
     }
 
     @FXML
     public void configuracion() throws IOException {
-        System.out.println("Comenzando....");
         App.setRoot("configuracion");
     }
     
@@ -98,7 +91,6 @@ public class InicioController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         play("music/One Piece OST - Nakama no Shirushi da! Sign Of Friendship.mp3");
 
-        // Carga la imagen desde los recursos
         Image image = new Image(getClass().getResourceAsStream("/imagenes/InicioLuffy.png"));
         luffyInicio.setImage(image);
         String preguntasFilePath = GameManager.getInstance().getPreguntasFilePath();
@@ -145,6 +137,7 @@ public class InicioController implements Initializable {
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter(currentPreguntasFile))) {
                     for (int i = 0; i < cleanedLines.size(); i++) {
                         String line = cleanedLines.get(i);
+                        System.out.println("Niaa " + line);
                         if (i == cleanedLines.size() - 1 && line.trim().isEmpty()) {
                             continue;
                         }
@@ -174,19 +167,23 @@ public class InicioController implements Initializable {
                     "Ocurrió un error al intentar actualizar el archivo de preguntas.");
         }
     }
-
+    
     private List<String> cleanFileContentFromTxt(List<String> lines) {
         List<String> cleanedLines = new ArrayList<>();
         for (String line : lines) {
             // Guardar la línea original para depuración
             String originalLine = line;
 
-            // Limpiar caracteres no deseados (e.g., eliminar BOM y otros)
+            // Convertir todos los espacios no separables a espacios normales
+            line = line.replace("\u00A0", " ");
+
+            // Limpiar caracteres no deseados (e.g., eliminar BOM y otros), pero preservar los espacios entre palabras
             line = line.replace("\uFEFF", "").replaceAll("[^\\p{ASCII}]", "").trim();
 
             // Verifica si la línea sigue el formato esperado de preguntas
             if (!line.trim().isEmpty() && isValidPreguntaFormat(line)) {
-                cleanedLines.add(line);
+                // Preservar espacios entre palabras, pero eliminar espacios adicionales al inicio y al final
+                cleanedLines.add(line.replaceAll("\\s+", " "));
             } else {
                 System.out.println("Línea eliminada: " + originalLine + " -> " + line);
             }
@@ -202,11 +199,11 @@ public class InicioController implements Initializable {
 
     private boolean isValidPreguntaFormat(String line) {
         System.out.println("Validando línea: " + line);
-        for (char c : line.toCharArray()) {
-            System.out.println("Carácter: '" + c + "' Código ASCII: " + (int) c);
-        }
+        // Asegúrate de que la validación permita espacios entre palabras
         return line.matches("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ¿?.,!¡ ]+");
     }
+
+
 
     @FXML
     private void cambiarArchivoRespuestas() {
@@ -268,7 +265,7 @@ public class InicioController implements Initializable {
         for (String line : lines) {
             String originalLine = line; // Guardar la línea original
             // Limpieza de caracteres no deseados
-            line = line.replace("\uFEFF", "").replaceAll("[^\\p{ASCII}]", "");
+            line = line.replace("\uFEFF", "").trim();
 
             // Asegurarse de que la línea siga el formato esperado
             if (!line.trim().isEmpty() && isValidRespuestaFormat(line)) {
