@@ -7,7 +7,13 @@ package com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ResourceBundle;
+import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -25,7 +31,9 @@ public class InicioController implements Initializable {
     
     @FXML
     private ImageView luffyInicio;
-    
+    @FXML
+    private ImageView gomuGomuNomi;
+        
     @FXML 
     public void play(String fileName){
         MediaPlayerManager.getInstance().play(fileName);
@@ -42,6 +50,42 @@ public class InicioController implements Initializable {
         System.out.println("Comenzando....");
         App.setRoot("configuracion");
     }
+    
+
+    private void iniciarAnimacion() {
+        // Configurar las posiciones iniciales de los ImageView
+        gomuGomuNomi.setY(0);
+        double height = gomuGomuNomi.getImage().getHeight();
+
+        // Crear una animación simple usando un bucle de animación
+        AnimationTimer animationTimer = new AnimationTimer() {
+            private long lastUpdate = 0;
+
+            @Override
+            public void handle(long now) {
+                if (lastUpdate != 0) {
+                    // Calcular el tiempo transcurrido en segundos desde la última actualización
+                    double elapsedTime = (now - lastUpdate) / 1_000_000_000.0;
+
+                    // Velocidad de la animación
+                    double speed = 500; // pixeles por segundo
+
+                    // Actualizar la posición de la imagen
+                    gomuGomuNomi.setY(gomuGomuNomi.getY() + speed * elapsedTime);
+
+                    // Si la imagen sale de la pantalla por la parte inferior, la reinicia desde arriba
+                    if (gomuGomuNomi.getY() > height) {
+                        gomuGomuNomi.setY(-height);
+                    }
+                }
+                lastUpdate = now;
+            }
+        };
+
+        animationTimer.start();
+    }
+
+        
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         play("music/One Piece OST - Nakama no Shirushi da! Sign Of Friendship.mp3");
@@ -52,6 +96,12 @@ public class InicioController implements Initializable {
         String preguntasFilePath = GameManager.getInstance().getPreguntasFilePath();
         String respuestasFilePath = GameManager.getInstance().getRespuestasFilePath();
         
+        
+        Image image2 = new Image(getClass().getResourceAsStream("/imagenes/gomuGomuAkumaNomi.png"));
+        gomuGomuNomi.setImage(image2);
+        
+        iniciarAnimacion();
+
         try {
             GameManager.getInstance().loadGameData(preguntasFilePath, respuestasFilePath);
         } catch (IOException ex) {
