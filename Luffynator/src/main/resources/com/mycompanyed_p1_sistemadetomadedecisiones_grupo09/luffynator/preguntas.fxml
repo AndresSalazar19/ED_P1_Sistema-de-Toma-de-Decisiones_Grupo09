@@ -38,5 +38,6 @@
 
         <!-- Botón Agregar Animal -->
         <Button fx:id="agregarAnimalButton" layoutX="331.0" layoutY="400.0" mnemonicParsing="false" styleClass="add-animal-button" text="Agregar Animal" visible="false" />
+      <ImageView fx:id="luffynatorImageView" fitHeight="150.0" fitWidth="200.0" layoutX="23.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 </Pane>

@@ -44,6 +44,8 @@ import static tda.CircularDoublyLinkedList.obtenerListaAnimales;
 public class PreguntasController implements Initializable {
     @FXML
     private ImageView animalImageView;
+    @FXML
+    private ImageView luffynatorImageView;
     
     @FXML
     private VBox animalImageBox;
@@ -74,6 +76,12 @@ public class PreguntasController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+         String imagePath = "src/main/resources/imagenes/InicioLuffy.png";
+         File imageFile = new File(imagePath);
+         Image image = new Image(imageFile.toURI().toString());
+         luffynatorImageView.setImage(image);
+
+            
         decisionTree = GameManager.getInstance().getDecisionTree();
         currentNode = decisionTree.getRoot();
 
@@ -97,7 +105,14 @@ public class PreguntasController implements Initializable {
        contadorPreguntas++;
        // Guardar la decisión en el camino
        caminoActual.add(respuestaSi ? "si" : "no");
-
+       
+       int mitad = GameManager.getInstance().getNumPreguntas()/2;
+       if (contadorPreguntas >= mitad  && GameManager.getInstance().getNumPreguntas()> 1){
+            String imagePath = "src/main/resources/imagenes/MIDLUFFY.png";
+            File imageFile = new File(imagePath);
+            Image image = new Image(imageFile.toURI().toString());
+            luffynatorImageView.setImage(image);
+       }
        // Avanzar en el árbol según la respuesta
        NodeDecisionTree siguienteNodo = null;
        if (respuestaSi && currentNode.getYesBranch() != null) {
@@ -131,11 +146,23 @@ public class PreguntasController implements Initializable {
 
     private void finalizarJuego(NodeDecisionTree ultimoNodo) {
         if (ultimoNodo == null) {
-               agregarAnimalButton.setVisible(true);
-               agregarAnimalButton.setOnAction(e -> insertNewAnimalInNullNode(true));
+            agregarAnimalButton.setVisible(true);
+            agregarAnimalButton.setOnAction(e -> insertNewAnimalInNullNode(true));
+            siButton.setDisable(true);
+            noButton.setDisable(true);
+            preguntaLabel.setText("¡SOY MUY DEBIL!");
+            String imagePathExito = "src/main/resources/imagenes/lastluffyfailure.jpg";
+            File imageFileExito = new File(imagePathExito);
+            Image imageExito = new Image(imageFileExito.toURI().toString());
+            luffynatorImageView.setImage(imageExito);
+            
         } else if (ultimoNodo.getYesBranch() == null && ultimoNodo.getNoBranch() == null) {
             preguntaLabel.setText("¡Adiviné! El animal es " + ultimoNodo.getContent() + "!");
-            
+            String imagePathExito = "src/main/resources/imagenes/lastluffysucceed.png";
+            File imageFileExito = new File(imagePathExito);
+            Image imageExito = new Image(imageFileExito.toURI().toString());
+            luffynatorImageView.setImage(imageExito);
+
             animalLabel.setText(ultimoNodo.getContent());
             String imagePath = "src/main/resources/imgAnimales/" + ultimoNodo.getContent().toLowerCase() + ".jpg";
             File imageFile = new File(imagePath);
@@ -202,9 +229,13 @@ public class PreguntasController implements Initializable {
 
                 // Informar al usuario que el árbol ha sido actualizado
                 preguntaLabel.setText("¡Gracias! He aprendido sobre " + animalName + "!");
+                String imagePathExito = "src/main/resources/imagenes/lastluffysucceed.png";
+                File imageFileExito = new File(imagePathExito);
+                Image imageExito = new Image(imageFileExito.toURI().toString());
+                luffynatorImageView.setImage(imageExito);
                 siButton.setDisable(true);
                 noButton.setDisable(true);
-
+                agregarAnimalButton.setDisable(true);
                 // Actualizar el archivo de respuestas
                 escribirNuevoAnimalEnArchivo(animalName);
             } else {
@@ -222,22 +253,36 @@ public class PreguntasController implements Initializable {
         
         if(animales.length() == 0){
             preguntaLabel.setText("Rayos, no se me ocurré ningún animal con esas características ");
+            String imagePathExito = "src/main/resources/imagenes/lastluffyfailure.jpg";
+            File imageFileExito = new File(imagePathExito);
+            Image imageExito = new Image(imageFileExito.toURI().toString());
+            luffynatorImageView.setImage(imageExito);
+                        
             return;
         }
         if(animales.length() == 1){
             currentAnimalNode = animales.getHead(); 
             preguntaLabel.setText("Pienso que es " +  animales.getHead().getContent() + ", JAJAJAJAJAJ");
-
+            String imagePathExito = "src/main/resources/imagenes/lastluffysucceed.png";
+            File imageFileExito = new File(imagePathExito);
+            Image imageExito = new Image(imageFileExito.toURI().toString());
+            luffynatorImageView.setImage(imageExito);
+            
             mostrarAnimalActual();                
             prevButton.setVisible(false);
-            nextButton.setVisible(false);           
+            nextButton.setVisible(false);
+            
             return; 
         }
 
         currentAnimalNode = animales.getHead(); 
         preguntaLabel.setText("Se me ocurren " + animales.length() + " animales, aquí te van.");
         animalLabel.setVisible(true);
-
+        String imagePathExito = "src/main/resources/imagenes/lastluffysucceed.png";
+        File imageFileExito = new File(imagePathExito);
+        Image imageExito = new Image(imageFileExito.toURI().toString());
+        luffynatorImageView.setImage(imageExito);
+            
         mostrarAnimalActual();
     }
 
