@@ -4,6 +4,7 @@
  */
 package com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,10 +16,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import tda.CircularDoublyLinkedList;
+import static tda.CircularDoublyLinkedList.obtenerListaAnimales;
+import tda.DecisionTree;
+import tda.Node;
+import tda.NodeDecisionTree;
 
 
 /**
@@ -30,10 +39,31 @@ public class OpcionesJuegoController implements Initializable {
     
     @FXML
     private ImageView luffyAmazed;
-    
       
     @FXML
     private TextField numPreguntasTF; 
+    
+    @FXML
+    private ImageView animalImageView;
+    
+    @FXML
+    private VBox animalImageBox;
+    
+    @FXML
+    private Label preguntaLabel;
+    @FXML
+    private Label animalLabel;
+
+    @FXML
+    private Button prevButton;
+    @FXML
+    
+    private Button nextButton;
+    private DecisionTree decisionTree;
+    private NodeDecisionTree currentNode;
+    private Node currentAnimalNode;
+    private CircularDoublyLinkedList animales;
+
     
     @FXML 
     public void play(String fileName){
@@ -106,7 +136,74 @@ public class OpcionesJuegoController implements Initializable {
         alerta.setHeaderText(null);
         alerta.showAndWait();
     }
-        
+
+    private void mostrarAnimalActual() {
+        if (currentAnimalNode != null) {
+            animalLabel.setText(currentAnimalNode.getContent());
+            String imagePath = "src/main/resources/imgAnimales/" + currentAnimalNode.getContent().toLowerCase() + ".jpg";
+            File imageFile = new File(imagePath);
+            
+            prevButton.setVisible(true);
+            nextButton.setVisible(true);
+            animalLabel.setVisible(true);
+                
+            if (imageFile.exists()) {
+                Image image = new Image(imageFile.toURI().toString());
+                animalImageView.setImage(image);
+                animalImageBox.setVisible(true);
+            } else {
+                imagePath = "src/main/resources/imgAnimales/unknown.jpg";
+                imageFile = new File(imagePath);
+                Image image = new Image(imageFile.toURI().toString());
+                animalImageView.setImage(image);
+                animalImageBox.setVisible(true);
+            }
+        }
+    }
+    
+    @FXML
+    private void mostrarAnimalAnterior() {
+        System.out.println("Mostrando animal anterior");
+        if (currentAnimalNode != null) {
+            currentAnimalNode = animales.getPrevious(currentAnimalNode);
+            animalLabel.setText(currentAnimalNode.getContent());
+            String imagePath = "src/main/resources/imgAnimales/" + currentAnimalNode.getContent().toLowerCase() + ".jpg";
+            File imageFile = new File(imagePath);
+
+            if (imageFile.exists()) {
+                Image image = new Image(imageFile.toURI().toString());
+                animalImageView.setImage(image);
+            } else {
+                imagePath = "src/main/resources/imgAnimales/unknown.jpg";
+                imageFile = new File(imagePath);
+                Image image = new Image(imageFile.toURI().toString());
+                animalImageView.setImage(image);
+            }
+        }
+    }
+    
+    @FXML
+    private void mostrarAnimalSiguiente() {
+        System.out.println("Mostrando animal siguiente");
+
+        if (currentAnimalNode != null) {
+            currentAnimalNode = animales.getNext(currentAnimalNode);
+            animalLabel.setText(currentAnimalNode.getContent());
+            String imagePath = "src/main/resources/imgAnimales/" + currentAnimalNode.getContent().toLowerCase() + ".jpg";
+            File imageFile = new File(imagePath);
+
+            if (imageFile.exists()) {
+                Image image = new Image(imageFile.toURI().toString());
+                animalImageView.setImage(image);
+            } else {
+                imagePath = "src/main/resources/imgAnimales/unknown.jpg";
+                imageFile = new File(imagePath);
+                Image image = new Image(imageFile.toURI().toString());
+                animalImageView.setImage(image);
+            }
+        }
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         play("music/おれの最高地点.mp3");
@@ -114,5 +211,10 @@ public class OpcionesJuegoController implements Initializable {
         Image image = new Image(getClass().getResourceAsStream("/imagenes/luffy amazed.png"));
         luffyAmazed.setImage(image);
         
+        DecisionTree arbolActual = GameManager.getInstance().getDecisionTree();
+        animales = obtenerListaAnimales(arbolActual);
+        currentAnimalNode = animales.getHead(); 
+        mostrarAnimalActual();
+
     }    
 }

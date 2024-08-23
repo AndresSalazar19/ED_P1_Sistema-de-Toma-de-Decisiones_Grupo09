@@ -81,7 +81,6 @@ public class PreguntasController implements Initializable {
             throw new IllegalStateException("El árbol de decisiones no debería estar vacío en este punto.");
         }
 
-        verificarArbol(currentNode); // Verifica la integridad del árbol
 
         preguntaLabel.setText(currentNode.getContent());
 
@@ -92,22 +91,6 @@ public class PreguntasController implements Initializable {
         nextButton.setOnAction(e -> mostrarAnimalSiguiente());
     }
     
-    public void verificarArbol(NodeDecisionTree node) {
-        if (node == null) return;
-
-        if (node.getYesBranch() == null && node.getNoBranch() == null) {
-            System.out.println("Nodo hoja encontrado: " + node.getContent());
-        } else {
-            System.out.println("Nodo interno encontrado: " + node.getContent());
-        }
-
-        if (node.getYesBranch() != null && node.getYesBranch().getRoot() != null) {
-            verificarArbol(node.getYesBranch().getRoot());
-        }
-        if (node.getNoBranch() != null && node.getNoBranch().getRoot() != null) {
-            verificarArbol(node.getNoBranch().getRoot());
-        }
-    }
 
 
     private void avanzar(boolean respuestaSi) {
@@ -243,7 +226,7 @@ public class PreguntasController implements Initializable {
         }
         if(animales.length() == 1){
             currentAnimalNode = animales.getHead(); 
-            preguntaLabel.setText("jejejejej " + " adiviné  , aquí te van.");
+            preguntaLabel.setText("Pienso que es " +  animales.getHead().getContent() + ", JAJAJAJAJAJ");
 
             mostrarAnimalActual();                
             prevButton.setVisible(false);
@@ -263,19 +246,23 @@ public class PreguntasController implements Initializable {
             animalLabel.setText(currentAnimalNode.getContent());
             String imagePath = "src/main/resources/imgAnimales/" + currentAnimalNode.getContent().toLowerCase() + ".jpg";
             File imageFile = new File(imagePath);
-
+            
+            siButton.setVisible(false);
+            noButton.setVisible(false);
+            prevButton.setVisible(true);
+            nextButton.setVisible(true);
+            animalLabel.setVisible(true);
+                
             if (imageFile.exists()) {
                 Image image = new Image(imageFile.toURI().toString());
-                animalImageBox.setVisible(true);
-                siButton.setVisible(false);
-                noButton.setVisible(false);
-                prevButton.setVisible(true);
-                nextButton.setVisible(true);
-                animalLabel.setVisible(true);
                 animalImageView.setImage(image);
+                animalImageBox.setVisible(true);
             } else {
-                System.out.println("Imagen no encontrada: " + imagePath);
-                animalImageView.setImage(null); 
+                imagePath = "src/main/resources/imgAnimales/unknown.jpg";
+                imageFile = new File(imagePath);
+                Image image = new Image(imageFile.toURI().toString());
+                animalImageView.setImage(image);
+                animalImageBox.setVisible(true);
             }
         }
     }
@@ -292,8 +279,10 @@ public class PreguntasController implements Initializable {
                 Image image = new Image(imageFile.toURI().toString());
                 animalImageView.setImage(image);
             } else {
-                System.out.println("Imagen no encontrada: " + imagePath);
-                animalImageView.setImage(null); // Limpia la vista si no se encuentra la imagen
+                imagePath = "src/main/resources/imgAnimales/unknown.jpg";
+                imageFile = new File(imagePath);
+                Image image = new Image(imageFile.toURI().toString());
+                animalImageView.setImage(image);
             }
         }
     }
@@ -311,8 +300,10 @@ public class PreguntasController implements Initializable {
                 Image image = new Image(imageFile.toURI().toString());
                 animalImageView.setImage(image);
             } else {
-                System.out.println("Imagen no encontrada: " + imagePath);
-                animalImageView.setImage(null); // Opcional: Limpia la vista si no se encuentra la imagen
+                imagePath = "src/main/resources/imgAnimales/unknown.jpg";
+                imageFile = new File(imagePath);
+                Image image = new Image(imageFile.toURI().toString());
+                animalImageView.setImage(image);
             }
         }
     }

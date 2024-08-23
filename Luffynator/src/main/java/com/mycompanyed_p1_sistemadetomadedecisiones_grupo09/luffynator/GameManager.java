@@ -82,6 +82,15 @@ public class GameManager {
         animales.display();
     }
 
+        public void loadGameData() throws IOException {
+        List<String> preguntas = readFile(preguntasFilePath);
+        List<String> respuestas = readFile(respuestasFilePath);
+        decisionTree = buildDecisionTree(preguntas, respuestas);
+        this.listaPreguntas = preguntas;
+        CircularDoublyLinkedList animales = obtenerListaAnimales(decisionTree);
+        animales.display();
+    }
+        
     public static List<String> readFile(String filePath) throws IOException {
         List<String> lineas = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {

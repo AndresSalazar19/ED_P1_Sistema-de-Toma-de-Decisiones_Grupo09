@@ -8,14 +8,14 @@
 
 <Pane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" stylesheets="@../../../styles/configuracion.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator.ConfiguracionController">
     <children>
-        <ScrollPane fitToHeight="false" fitToWidth="true" layoutX="61.0" layoutY="47.0" prefHeight="491.0" prefWidth="716.0">
+        <ScrollPane fitToHeight="false" fitToWidth="true" layoutX="17.0" layoutY="14.0" prefHeight="584.0" prefWidth="767.0">
         <content>
-            <VBox fx:id="animalListVBox" layoutX="5.0" prefHeight="475.0" prefWidth="693.0" />
+            <VBox fx:id="animalListVBox" layoutX="5.0" prefHeight="608.0" prefWidth="804.0" />
         </content>
       </ScrollPane>
 
         <!-- Botón para volver -->
-        <Button fx:id="volverButton" layoutX="350.0" layoutY="526.0" mnemonicParsing="false" onAction="#volver" styleClass="button-general" text="Volver" />
+        <Button fx:id="volverButton" layoutX="343.0" layoutY="543.0" mnemonicParsing="false" onAction="#volver" styleClass="button-general" text="Volver" />
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

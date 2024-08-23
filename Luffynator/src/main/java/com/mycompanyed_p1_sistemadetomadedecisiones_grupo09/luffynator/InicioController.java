@@ -75,14 +75,14 @@ public class InicioController implements Initializable {
                     double elapsedTime = (now - lastUpdate) / 1_000_000_000.0;
 
                     // Velocidad de la animación
-                    double speed = 500; // pixeles por segundo
+                    double speed = 300; // pixeles por segundo
 
                     // Actualizar la posición de la imagen
                     gomuGomuNomi.setY(gomuGomuNomi.getY() + speed * elapsedTime);
 
                     // Si la imagen sale de la pantalla por la parte inferior, la reinicia desde arriba
-                    if (gomuGomuNomi.getY() > height) {
-                        gomuGomuNomi.setY(-height);
+                    if (gomuGomuNomi.getY() >= height) {
+                        gomuGomuNomi.setY(-height + (gomuGomuNomi.getY() - height));
                     }
                 }
                 lastUpdate = now;
@@ -91,6 +91,7 @@ public class InicioController implements Initializable {
 
         animationTimer.start();
     }
+
 
         
     @Override
@@ -160,6 +161,13 @@ public class InicioController implements Initializable {
                 // Mostrar alerta de éxito
                 showSuccessAlert("Archivo de Preguntas Actualizado",
                         "El archivo de preguntas se ha actualizado correctamente desde el archivo TXT.");
+            
+            try {
+                GameManager.getInstance().loadGameData();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+                        
             }
         } catch (IOException e) {
             showErrorAlert("Error al Actualizar Preguntas",
@@ -243,6 +251,11 @@ public class InicioController implements Initializable {
                 // Mostrar alerta de éxito
                 showSuccessAlert("Archivo de Respuestas Actualizado",
                         "El archivo de respuestas se ha actualizado correctamente desde el archivo TXT.");
+                try {
+                    GameManager.getInstance().loadGameData();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }                
             }
         } catch (IOException e) {
             showErrorAlert("Error al Actualizar Respuestas",
