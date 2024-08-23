@@ -62,7 +62,7 @@ public class ConfiguracionController implements Initializable {
         System.out.println("Animal " + i + ": " + animal); // Imprime cada animal
 
         // Crear HBox para organizar los elementos en una línea
-        HBox animalBox = new HBox();  // Elimina el espaciado interno del HBox para un control más preciso
+        HBox animalBox = new HBox(); 
         animalBox.setStyle("-fx-alignment: center-left; -fx-padding: 10; -fx-background-color: #FFF9C4; -fx-border-color: #FB8C00; -fx-border-width: 2px;");
         animalBox.setPrefWidth(650); // Ancho preferido para la alineación correcta
 
@@ -104,10 +104,8 @@ public class ConfiguracionController implements Initializable {
             }
         });
 
-        // Agregar todos los componentes al HBox
         animalBox.getChildren().addAll(numeroLabel, animalLabel, animalImageView, editarButton);
 
-        // Agregar el HBox al VBox
         animalListVBox.getChildren().add(animalBox);
     }
 
@@ -127,10 +125,8 @@ public class ConfiguracionController implements Initializable {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg"));
         File selectedFile = fileChooser.showOpenDialog(volverButton.getScene().getWindow());
         if (selectedFile != null) {
-            // Guardar la nueva imagen con el nombre del animal
             File destFile = new File("src/main/resources/imgAnimales/" + animal.toLowerCase() + ".jpg");
             Files.copy(selectedFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            // Actualizar la ImageView
             animalImageView.setImage(new Image(destFile.toURI().toString()));
         }
     }

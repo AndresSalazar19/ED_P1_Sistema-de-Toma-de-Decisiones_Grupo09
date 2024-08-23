@@ -57,17 +57,14 @@ public class InicioController implements Initializable {
         gomuGomuNomi.setY(0);
         double height = gomuGomuNomi.getImage().getHeight();
 
-        // Crear una animación simple usando un bucle de animación
         AnimationTimer animationTimer = new AnimationTimer() {
             private long lastUpdate = 0;
 
             @Override
             public void handle(long now) {
                 if (lastUpdate != 0) {
-                    // Calcular el tiempo transcurrido en segundos desde la última actualización
                     double elapsedTime = (now - lastUpdate) / 1_000_000_000.0;
 
-                    // Velocidad de la animación
                     double speed = 300; // pixeles por segundo
 
                     // Actualizar la posición de la imagen

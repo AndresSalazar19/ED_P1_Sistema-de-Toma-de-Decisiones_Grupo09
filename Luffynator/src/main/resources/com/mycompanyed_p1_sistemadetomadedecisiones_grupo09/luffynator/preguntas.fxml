@@ -13,16 +13,6 @@
         <URL value="@/styles/preguntas.css" />
     </stylesheets>
     <children>
-        <Button fx:id="volverButton" layoutX="45.0" layoutY="481.0" mnemonicParsing="false" onAction="#volver" styleClass="button-general" text="Volver" />
-        <!-- Botones de respuesta -->
-        <Button fx:id="siButton" layoutX="466.0" layoutY="106.0" mnemonicParsing="false" styleClass="button-general" text="Sí" />
-        <Button fx:id="noButton" layoutX="462.0" layoutY="198.0" mnemonicParsing="false" styleClass="button-general" text="No" />
-        <Button fx:id="prevButton" layoutX="152.0" layoutY="381.0" mnemonicParsing="false" styleClass="button-general" text="&lt;" visible="false" />
-        <Button fx:id="nextButton" layoutX="601.0" layoutY="381.0" mnemonicParsing="false" styleClass="button-general" text="&gt;" visible="false" />
-
-        <!-- Botón Agregar Animal -->
-        <Button fx:id="agregarAnimalButton" layoutX="331.0" layoutY="400.0" mnemonicParsing="false" styleClass="add-animal-button" text="Agregar Animal" visible="false" />
-      <ImageView fx:id="luffynatorImageView" fitHeight="219.0" fitWidth="259.0" layoutX="527.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true" />
       <VBox layoutX="249.0" layoutY="284.0" prefHeight="195.0" prefWidth="302.0">
          <children>
             <VBox prefHeight="0.0" prefWidth="302.0">
@@ -40,6 +30,16 @@
               </VBox>
          </children>
       </VBox>
+        <Button fx:id="volverButton" layoutX="45.0" layoutY="481.0" mnemonicParsing="false" onAction="#volver" styleClass="button-general" text="Volver" />
+        <!-- Botones de respuesta -->
+        <Button fx:id="siButton" layoutX="466.0" layoutY="106.0" mnemonicParsing="false" styleClass="button-general" text="Sí" />
+        <Button fx:id="noButton" layoutX="462.0" layoutY="198.0" mnemonicParsing="false" styleClass="button-general" text="No" />
+        <Button fx:id="prevButton" layoutX="152.0" layoutY="381.0" mnemonicParsing="false" styleClass="button-general" text="&lt;" visible="false" />
+        <Button fx:id="nextButton" layoutX="601.0" layoutY="381.0" mnemonicParsing="false" styleClass="button-general" text="&gt;" visible="false" />
+
+        <!-- Botón Agregar Animal -->
+        <Button fx:id="agregarAnimalButton" layoutX="331.0" layoutY="400.0" mnemonicParsing="false" styleClass="add-animal-button" text="Agregar Animal" visible="false" />
+      <ImageView fx:id="luffynatorImageView" fitHeight="219.0" fitWidth="259.0" layoutX="527.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true" />
         <!-- Caja de Pregunta -->
         <!-- Contenedor para el cuadro de diálogo -->
         <HBox fx:id="dialogBox" layoutX="95.0" layoutY="158.0" styleClass="dialog-box">
