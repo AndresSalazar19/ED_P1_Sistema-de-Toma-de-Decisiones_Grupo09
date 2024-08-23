@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -21,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import tda.CircularDoublyLinkedList;
@@ -42,56 +44,77 @@ public class ConfiguracionController implements Initializable {
 
     private CircularDoublyLinkedList listaAnimales;
 
+    @FXML 
+    public void play(String fileName){
+        MediaPlayerManager.getInstance().play(fileName);
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        play("music/One Piece - Nami's Theme.mp3");
+
         cargarAnimales();
-        System.out.println("Número de animales: " + listaAnimales.length()); // Verifica el número de animales
+        System.out.println("Número de animales: " + listaAnimales.length());
 
-        // Recorrer los animales y agregarlos al VBox
-        for (int i = 0; i < listaAnimales.length(); i++) {
-            String animal = listaAnimales.get(i);
-            System.out.println("Animal " + i + ": " + animal); // Imprime cada animal
+    // Recorrer los animales y agregarlos al VBox
+    for (int i = 0; i < listaAnimales.length(); i++) {
+        String animal = listaAnimales.get(i);
+        System.out.println("Animal " + i + ": " + animal); // Imprime cada animal
 
-            HBox animalBox = new HBox(10);  // Espaciado de 10 entre los elementos
-            animalBox.setStyle("-fx-alignment: center-left;");
+        // Crear HBox para organizar los elementos en una línea
+        HBox animalBox = new HBox();  // Elimina el espaciado interno del HBox para un control más preciso
+        animalBox.setStyle("-fx-alignment: center-left; -fx-padding: 10; -fx-background-color: #FFF9C4; -fx-border-color: #FB8C00; -fx-border-width: 2px;");
+        animalBox.setPrefWidth(650); // Ancho preferido para la alineación correcta
 
-            // Crear y agregar el número del animal
-            Label numeroLabel = new Label((i + 1) + ". ");
-            numeroLabel.setStyle("-fx-font-size: 16px;");
+        // Crear y agregar el número del animal
+        Label numeroLabel = new Label((i + 1) + ". ");
+        numeroLabel.setStyle("-fx-font-size: 16px;");
+        HBox.setMargin(numeroLabel, new Insets(0, 10, 0, 10));
 
-            // Crear y agregar el nombre del animal
-            Label animalLabel = new Label(animal);
-            animalLabel.setStyle("-fx-font-size: 16px;");
+        // Crear y agregar el nombre del animal
+        Label animalLabel = new Label(animal);
+        animalLabel.setStyle("-fx-font-size: 16px;");
+        HBox.setHgrow(animalLabel, Priority.ALWAYS); // Esto permite que el label use todo el espacio disponible
 
-            // Crear y agregar la imagen del animal
-            ImageView animalImageView = new ImageView();
-            animalImageView.setFitHeight(50);
-            animalImageView.setFitWidth(50);
-            File imageFile = new File("src/main/resources/imgAnimales/" + animal.toLowerCase() + ".jpg");
-            if (imageFile.exists()) {
-                animalImageView.setImage(new Image(imageFile.toURI().toString()));
-            } else {
-                // Imagen predeterminada si no se encuentra la imagen
-                animalImageView.setImage(new Image(getClass().getResourceAsStream("/imgAnimales/unknown.jpg")));
-            }
+        // Crear y agregar la imagen del animal
+        ImageView animalImageView = new ImageView();
+        animalImageView.setFitHeight(100);  // Ajusta la altura de la imagen
+        animalImageView.setFitWidth(100);   // Ajusta el ancho de la imagen
+        HBox.setMargin(animalImageView, new Insets(0, 20, 0, 20));
 
-            // Crear y agregar el botón de editar imagen
-            Button editarButton = new Button("Editar Imagen");
-            editarButton.setOnAction(event -> {
-                try {
-                    editarImagen(animalLabel.getText(), animalImageView);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-
-            // Agregar todos los componentes al HBox
-            animalBox.getChildren().addAll(numeroLabel, animalLabel, animalImageView, editarButton);
-
-            // Agregar el HBox al VBox
-            animalListVBox.getChildren().add(animalBox);
+        File imageFile = new File("src/main/resources/imgAnimales/" + animal.toLowerCase() + ".jpg");
+        if (imageFile.exists()) {
+            animalImageView.setImage(new Image(imageFile.toURI().toString()));
+        } else {
+            // Imagen predeterminada si no se encuentra la imagen
+            animalImageView.setImage(new Image(getClass().getResourceAsStream("/imgAnimales/unknown.jpg")));
         }
+
+        // Crear y agregar el botón de editar imagen
+        Button editarButton = new Button("Editar Imagen");
+        editarButton.getStyleClass().add("edit-button"); // Aplicar estilo CSS
+        HBox.setMargin(editarButton, new Insets(0, 10, 0, 10));
+        HBox.setHgrow(editarButton, Priority.ALWAYS); // Dejar que el botón ocupe todo el espacio disponible para alinearlo a la derecha
+
+        editarButton.setOnAction(event -> {
+            try {
+                editarImagen(animalLabel.getText(), animalImageView);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        // Agregar todos los componentes al HBox
+        animalBox.getChildren().addAll(numeroLabel, animalLabel, animalImageView, editarButton);
+
+        // Agregar el HBox al VBox
+        animalListVBox.getChildren().add(animalBox);
     }
+
+
+    }
+
+
 
 
     private void cargarAnimales() {

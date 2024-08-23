@@ -148,8 +148,8 @@ public class PreguntasController implements Initializable {
 
     private void finalizarJuego(NodeDecisionTree ultimoNodo) {
         if (ultimoNodo == null) {
-            agregarAnimalButton.setVisible(true);
-            agregarAnimalButton.setOnAction(e -> insertNewAnimalInNullNode(true));
+               agregarAnimalButton.setVisible(true);
+               agregarAnimalButton.setOnAction(e -> insertNewAnimalInNullNode(true));
         } else if (ultimoNodo.getYesBranch() == null && ultimoNodo.getNoBranch() == null) {
             preguntaLabel.setText("¡Adiviné! El animal es " + ultimoNodo.getContent() + "!");
             
@@ -178,7 +178,6 @@ public class PreguntasController implements Initializable {
             mostrarListaAnimales();
         }
     }
-
 
 
 
@@ -237,10 +236,19 @@ public class PreguntasController implements Initializable {
         
         DecisionTree arbolActual = GameManager.getInstance().getDecisionTree();
         animales = obtenerListaAnimales(arbolActual); 
-
+        
+        if(animales.length() == 0){
+            preguntaLabel.setText("Rayos, no se me ocurré ningún animal con esas características ");
+            return;
+        }
         if(animales.length() == 1){
-            finalizarJuego(arbolActual.getRoot());
-            return;  // Aquí, retornamos inmediatamente ya que no es necesario continuar.
+            currentAnimalNode = animales.getHead(); 
+            preguntaLabel.setText("jejejejej " + " adiviné  , aquí te van.");
+
+            mostrarAnimalActual();                
+            prevButton.setVisible(false);
+            nextButton.setVisible(false);           
+            return; 
         }
 
         currentAnimalNode = animales.getHead(); 
