@@ -1,7 +1,96 @@
-/*
- * Empty Stylesheet file.
- */
-
+/* Estilo principal */
 .mainFxmlClass {
+    -fx-background-color: linear-gradient(to bottom, #87CEEB, #00BFFF); /* Gradiente para el fondo */
+    -fx-background-image: url("/imagenes/OPbackground.jpg"); /* Ruta de la imagen de fondo */
+    -fx-background-size: cover; /* Asegura que la imagen cubra todo el fondo */
+    -fx-background-position: center center; /* Centra la imagen en el Pane */
+    -fx-background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
 
+/* Estilo del título Luffynator */
+#titleLabel {
+    -fx-text-fill: orange;
+    -fx-font-family: "Arial Bold";
+    -fx-font-size: 48px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 5, 0, 2, 2); /* Sombra al texto */
+    -fx-translate-y: 0;
+    -fx-transition: -fx-translate-y 0.3s ease-in-out;
+}
+
+#titleLabel:hover {
+    -fx-translate-y: -10px; /* Mueve el título hacia arriba al pasar el ratón */
+}
+
+/* Estilo de la imagen del personaje */
+#imageLabel {
+    -fx-font-size: 64px; /* Ajusta según el uso */
+    -fx-opacity: 1;
+    -fx-transition: -fx-opacity 0.5s ease-in-out;
+}
+
+#imageLabel:hover {
+    -fx-opacity: 0.8; /* Hace la imagen ligeramente transparente al pasar el ratón */
+}
+
+/* Estilo del label de preguntas */
+#statsLabel {
+    -fx-text-fill: orange; /* Cambia el color del texto para que coincida con el tema */
+    -fx-font-family: "Arial Bold"; /* Usa la misma fuente que el título */
+    -fx-font-size: 20px; /* Ajusta el tamaño de la fuente */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 2, 0, 1, 1); /* Sombra ligera */
+}
+
+/* Estilo del TextField */
+.text-field {
+    -fx-background-color: #F0E68C; /* Color de fondo similar al tema del juego */
+    -fx-border-color: orange; /* Borde que combina con el tema */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px; /* Bordes redondeados para un estilo más amigable */
+    -fx-font-family: Arial;
+    -fx-font-size: 16px;
+    -fx-text-fill: #000000; /* Color del texto negro */
+    -fx-padding: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 4, 0, 2, 2); /* Sombra ligera */
+}
+
+.text-field:focused {
+    -fx-border-color: #FF8C00; /* Cambia el color del borde al enfocar */
+    -fx-background-color: #F5DEB3; /* Cambia el color de fondo al enfocar */
+}
+
+/* Estilo general para todos los botones */
+.button-general {
+    -fx-background-color: #FFA500;
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-size: 24px;
+    -fx-background-radius: 10;
+    -fx-cursor: hand; /* Cambia el cursor al pasar sobre el botón */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 2, 2); /* Sombra al botón */
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+.button-general:hover {
+    -fx-background-color: #FF8C00; /* Cambia de color al pasar el ratón */
+    -fx-scale-x: 1.1; /* Agranda el botón al pasar el ratón */
+    -fx-scale-y: 1.1;
+}
+
+#animalLabel{
+     -fx-font-size: 15px;    
+     -fx-font-weight: bold;
+     -fx-alignment: center;
+}
+
+#animalesPosiblesLabel{
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+#animalImageBox {
+    -fx-background-color: #b0e3ee; /* Color de fondo (por ejemplo, un color rosado claro) */
+}
+
+#animalVBIV{
+   -fx-alignment: center;
 }

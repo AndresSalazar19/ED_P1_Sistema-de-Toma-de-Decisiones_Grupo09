@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -10,31 +9,36 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<Pane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator.OpcionesJuegoController">
-    <stylesheets>
-        <URL value="@/styles/inicio.css" />
-    </stylesheets>
+<Pane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" stylesheets="@../../../styles/opcionesjuego.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator.OpcionesJuegoController">
     <children> <!-- Sustituye el texto por una imagen -->
 
         <!-- Botón para jugar -->
-        <Button fx:id="jugarButton" layoutX="378.0" layoutY="526.0" onAction="#jugar" styleClass="button-general" text="Jugar" />
+        <Button fx:id="jugarButton" layoutX="355.0" layoutY="489.0" onAction="#jugar" styleClass="button-general" text="Jugar" />
         
         <!-- Campo de texto para el número de preguntas -->
-        <TextField fx:id="numPreguntasTF" layoutX="313.0" layoutY="158.0" prefHeight="25.0" prefWidth="139.0" />
-        <Text fx:id="statsLabel" layoutX="59.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de preguntas:" />
+        <TextField fx:id="numPreguntasTF" layoutX="332.0" layoutY="105.0" prefHeight="25.0" prefWidth="139.0" />
+        <Text fx:id="statsLabel" layoutX="57.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de preguntas:" />
 
         <!-- Botón para volver -->
-        <Button fx:id="volverButton" layoutX="67.0" layoutY="526.0" mnemonicParsing="false" onAction="#volver" styleClass="button-general" text="Volver" />
-      <ImageView fx:id="luffyAmazed" fitHeight="323.0" fitWidth="341.0" layoutX="492.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" />
-      <VBox fx:id="animalImageBox" layoutX="59.0" layoutY="265.0" prefHeight="200" prefWidth="300" styleClass="animal-image-box" visible="false">
+        <Button fx:id="volverButton" layoutX="57.0" layoutY="526.0" mnemonicParsing="false" onAction="#volver" prefWidth="105.0" styleClass="button-general" text="Volver" />
+      <ImageView fx:id="luffyAmazed" fitHeight="268.0" fitWidth="300.0" layoutX="621.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="prevButton" layoutX="140.0" layoutY="330.0" mnemonicParsing="false" onAction="#mostrarAnimalAnterior" styleClass="button-general" text="&lt;" visible="false" />
+      <Button fx:id="nextButton" layoutX="612.0" layoutY="334.0" mnemonicParsing="false" onAction="#mostrarAnimalSiguiente" styleClass="button-general" text="&gt;" visible="false" />
+      <Label fx:id="animalesPosiblesLabel" layoutX="330.0" layoutY="190.0" text="Animales posibles" />
+      <VBox fx:id="animalImageBox" layoutX="230.0" layoutY="226.0" prefHeight="251.0" prefWidth="351.0">
          <children>
-            <ImageView fx:id="animalImageView" fitHeight="180" fitWidth="280" preserveRatio="true" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label fx:id="animalLabel" prefHeight="48.0" prefWidth="352.0" styleClass="animal-label" text="Animal" textAlignment="CENTER" visible="false" />
+               </children>
+            </VBox>
+            <VBox fx:id="animalVBIV" prefHeight="254.0" prefWidth="351.0" styleClass="animal-image-box">
+               <children>
+                  <ImageView fx:id="animalImageView" fitHeight="203.0" fitWidth="352.0" preserveRatio="true" />
+               </children>
+            </VBox>
          </children>
       </VBox>
-      <Label fx:id="animalLabel" layoutX="160.0" layoutY="273.0" styleClass="animal-label" text="Animal" visible="false" />
-      <Button fx:id="prevButton" layoutX="86.0" layoutY="341.0" mnemonicParsing="false" onAction="#mostrarAnimalAnterior" styleClass="button-general" text="&lt;" visible="false" />
-      <Button fx:id="nextButton" layoutX="259.0" layoutY="354.0" mnemonicParsing="false" onAction="#mostrarAnimalSiguiente" styleClass="button-general" text="&gt;" visible="false" />
-      <Label layoutX="67.0" layoutY="248.0" text="Animales posibles" />
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
