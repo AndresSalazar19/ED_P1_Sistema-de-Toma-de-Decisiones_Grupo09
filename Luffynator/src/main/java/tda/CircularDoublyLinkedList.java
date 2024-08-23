@@ -48,7 +48,7 @@ public class CircularDoublyLinkedList {
     
     public void display() {
         if (head == null) {
-            System.out.println("List is empty.");
+            System.out.println("La lista está vacía");
             return;
         }
 
@@ -63,22 +63,16 @@ public class CircularDoublyLinkedList {
 
     public static CircularDoublyLinkedList obtenerListaAnimales(DecisionTree tree) {
         CircularDoublyLinkedList listaAnimales = new CircularDoublyLinkedList();
-        System.out.println("OBTENIENDO ANIMALES");
-
         if (tree == null || tree.getRoot() == null) {
             System.out.println("La lista de preguntas o respuestas está vacía");
             return listaAnimales;
         }
 
         Queue<NodeDecisionTree> queue = new LinkedList<>();
-        System.out.println("ME ARRECHO" + tree.getRoot().getContent());
         queue.add(tree.getRoot());
         
-        int count = 1;
 
         while (!queue.isEmpty()) {
-            System.out.println("FAAAA " + count);
-            count += 1;
             NodeDecisionTree currentNode = queue.poll();
 
             // Verificar si es una hoja
@@ -100,6 +94,7 @@ public class CircularDoublyLinkedList {
         }
         return listaAnimales;
     }
+    
     public int length() {
         if (head == null) {
             return 0;
@@ -120,5 +115,16 @@ public class CircularDoublyLinkedList {
         return head == null;
     }
 
+    public String get(int i) {
+        if (i < 0 || i >= length()) {
+            throw new IndexOutOfBoundsException("Índice fuera de los límites: " + i);
+        }
+
+        Node temp = head;
+        for (int j = 0; j < i; j++) {
+            temp = temp.next;
+        }
+        return temp.data; // Devuelve el contenido del nodo en la posición i
+    }
 
 }

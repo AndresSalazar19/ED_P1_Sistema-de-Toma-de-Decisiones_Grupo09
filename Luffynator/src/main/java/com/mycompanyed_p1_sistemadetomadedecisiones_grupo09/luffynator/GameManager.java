@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,7 +12,6 @@ import java.util.LinkedList;
 import java.util.List;
 import tda.*;
 import static tda.CircularDoublyLinkedList.obtenerListaAnimales;
-
 
 /**
  *
@@ -25,7 +25,8 @@ public class GameManager {
     private String preguntasFilePath = "src/main/java/archivos/ArchivoPreguntas.csv";
     private String respuestasFilePath = "src/main/java/archivos/ArchivoRespuestas.csv";
 
-    private GameManager() {}
+    private GameManager() {
+    }
 
     public static GameManager getInstance() {
         if (instance == null) {
@@ -49,7 +50,7 @@ public class GameManager {
     public void setDecisionTree(DecisionTree decisionTree) {
         this.decisionTree = decisionTree;
     }
-    
+
     public String getPreguntasFilePath() {
         return preguntasFilePath;
     }
@@ -57,7 +58,7 @@ public class GameManager {
     public String getRespuestasFilePath() {
         return respuestasFilePath;
     }
-    
+
     public void setPreguntasFilePath(String preguntasFilePath) {
         this.preguntasFilePath = preguntasFilePath;
     }
@@ -72,7 +73,7 @@ public class GameManager {
         List<String> preguntas = readFile(preguntasFilePath);
         List<String> respuestas = readFile(respuestasFilePath);
         decisionTree = buildDecisionTree(preguntas, respuestas);
-        
+
         CircularDoublyLinkedList animales = obtenerListaAnimales(decisionTree);
         animales.display();
     }
@@ -82,16 +83,15 @@ public class GameManager {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                // Eliminar cualquier punto y coma adicional al final de cada línea
-                linea = linea.replaceAll(";+\\s*$", "");
+                linea = linea.replaceAll("^\"|\"$", "");
+
+                linea = linea.replaceAll("[;]+$", "");
+
                 lineas.add(linea);
             }
         }
         return lineas;
     }
-
-
-
 
     public static DecisionTree buildDecisionTree(List<String> questions, List<String> answers) {
         DecisionTree decisionTree = new DecisionTree();
@@ -100,7 +100,7 @@ public class GameManager {
         // Recorremos cada respuesta para construir el árbol
         for (String answer : answers) {
             String[] sepAnswer = answer.split(",");
-            String element = sepAnswer[0]; // El animal (e.g., "gato")
+            String element = sepAnswer[0];
 
             NodeDecisionTree current = decisionTree.getRoot();
 
@@ -134,7 +134,5 @@ public class GameManager {
 
         return decisionTree;
     }
-
-
 
 }

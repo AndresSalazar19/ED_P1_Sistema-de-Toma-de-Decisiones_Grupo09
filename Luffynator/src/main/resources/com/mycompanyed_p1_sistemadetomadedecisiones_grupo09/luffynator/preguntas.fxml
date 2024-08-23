@@ -24,7 +24,7 @@
         <!-- Botones de respuesta -->
         <Button fx:id="siButton" layoutX="250" layoutY="200" mnemonicParsing="false" styleClass="button-general" text="Sí" />
         <Button fx:id="noButton" layoutX="450" layoutY="200" mnemonicParsing="false" styleClass="button-general" text="No" />
-        <Button fx:id="prevButton" layoutX="193.0" layoutY="321.0" mnemonicParsing="false" styleClass="button-general" text="Prev" visible="false" />
+        <Button fx:id="prevButton" layoutX="84.0" layoutY="328.0" mnemonicParsing="false" styleClass="button-general" text="Prev" visible="false" />
         <Button fx:id="nextButton" layoutX="565.0" layoutY="340.0" mnemonicParsing="false" styleClass="button-general" text="Next" visible="false" />
       
         <!-- Caja texturizada para la imagen del animal -->
@@ -34,7 +34,7 @@
             </children>
         </VBox>
         <!-- Etiqueta de Animal -->
-        <Label fx:id="animalLabel" layoutX="362.0" layoutY="248.0" styleClass="animal-label" text="Animal" />
+        <Label fx:id="animalLabel" layoutX="362.0" layoutY="248.0" styleClass="animal-label" text="Animal" visible="false" />
 
         <!-- Botón Agregar Animal -->
         <Button fx:id="agregarAnimalButton" layoutX="331.0" layoutY="400.0" mnemonicParsing="false" styleClass="add-animal-button" text="Agregar Animal" visible="false" />

@@ -24,39 +24,51 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-
 /**
  * FXML Controller class
  *
  * @author asala
  */
 public class InicioController implements Initializable {
-    
+
     @FXML
     private ImageView luffyInicio;
-    
-    @FXML 
-    public void play(String fileName){
+
+    @FXML
+    public void play(String fileName) {
         MediaPlayerManager.getInstance().play(fileName);
     }
 
     @FXML
-    public void comenzar() throws IOException{
+    public void comenzar() throws IOException {
         System.out.println("Comenzando....");
         App.setRoot("opcionesJuego");
     }
 
+    @FXML
+    public void configuracion() throws IOException {
+        System.out.println("Comenzando....");
+        App.setRoot("configuracion");
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         play("music/One Piece OST - Nakama no Shirushi da! Sign Of Friendship.mp3");
-        
-                // Carga la imagen desde los recursos
+
+        // Carga la imagen desde los recursos
         Image image = new Image(getClass().getResourceAsStream("/imagenes/InicioLuffy.png"));
         luffyInicio.setImage(image);
+        String preguntasFilePath = GameManager.getInstance().getPreguntasFilePath();
+        String respuestasFilePath = GameManager.getInstance().getRespuestasFilePath();
+
+        try {
+            GameManager.getInstance().loadGameData(preguntasFilePath, respuestasFilePath);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
     }
-    
-        
+
     @FXML
     private void cambiarArchivoPreguntas() {
         try {
@@ -75,7 +87,8 @@ public class InicioController implements Initializable {
                 List<String> cleanedLines = cleanFileContentFromTxt(lines);
 
                 if (cleanedLines.isEmpty()) {
-                    showErrorAlert("Limpieza Eliminó Todo", "El contenido del archivo TXT no es válido o fue eliminado durante la limpieza.");
+                    showErrorAlert("Limpieza Eliminó Todo",
+                            "El contenido del archivo TXT no es válido o fue eliminado durante la limpieza.");
                     return;
                 }
 
@@ -93,16 +106,18 @@ public class InicioController implements Initializable {
                     }
                 }
 
-                System.out.println("Archivo de preguntas actualizado desde TXT: " + currentPreguntasFile.getAbsolutePath());
+                System.out.println(
+                        "Archivo de preguntas actualizado desde TXT: " + currentPreguntasFile.getAbsolutePath());
 
                 // Mostrar alerta de éxito
-                showSuccessAlert("Archivo de Preguntas Actualizado", "El archivo de preguntas se ha actualizado correctamente desde el archivo TXT.");
+                showSuccessAlert("Archivo de Preguntas Actualizado",
+                        "El archivo de preguntas se ha actualizado correctamente desde el archivo TXT.");
             }
         } catch (IOException e) {
-            showErrorAlert("Error al Actualizar Preguntas", "Ocurrió un error al intentar actualizar el archivo de preguntas.");
+            showErrorAlert("Error al Actualizar Preguntas",
+                    "Ocurrió un error al intentar actualizar el archivo de preguntas.");
         }
     }
-
 
     private List<String> cleanFileContentFromTxt(List<String> lines) {
         List<String> cleanedLines = new ArrayList<>();
@@ -123,12 +138,12 @@ public class InicioController implements Initializable {
 
         // Verificar si después de la limpieza hay líneas válidas
         if (cleanedLines.isEmpty()) {
-            showErrorAlert("Limpieza Eliminó Todo", "El contenido del archivo TXT no es válido o fue eliminado durante la limpieza.");
+            showErrorAlert("Limpieza Eliminó Todo",
+                    "El contenido del archivo TXT no es válido o fue eliminado durante la limpieza.");
         }
         return cleanedLines;
     }
 
-    
     private boolean isValidPreguntaFormat(String line) {
         System.out.println("Validando línea: " + line);
         for (char c : line.toCharArray()) {
@@ -137,57 +152,56 @@ public class InicioController implements Initializable {
         return line.matches("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ¿?.,!¡ ]+");
     }
 
+    @FXML
+    private void cambiarArchivoRespuestas() {
+        try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+            Stage stage = App.getPrimaryStage();
+            File selectedFile = fileChooser.showOpenDialog(stage);
 
-  
-   @FXML
-   private void cambiarArchivoRespuestas() {
-       try {
-           FileChooser fileChooser = new FileChooser();
-           fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
-           Stage stage = App.getPrimaryStage();
-           File selectedFile = fileChooser.showOpenDialog(stage);
+            if (selectedFile != null) {
+                File currentRespuestasFile = new File("src/main/java/archivos/ArchivoRespuestas.csv");
 
-           if (selectedFile != null) {
-               File currentRespuestasFile = new File("src/main/java/archivos/ArchivoRespuestas.csv");
+                // Leer contenido del archivo TXT
+                List<String> lines = Files.readAllLines(selectedFile.toPath());
 
-               // Leer contenido del archivo TXT
-               List<String> lines = Files.readAllLines(selectedFile.toPath());
+                // Limpiar y convertir el contenido a formato CSV
+                List<String> cleanedLines = cleanFileContentFromTxtForRespuestas(lines);
 
-               // Limpiar y convertir el contenido a formato CSV
-               List<String> cleanedLines = cleanFileContentFromTxtForRespuestas(lines);
+                if (cleanedLines.isEmpty()) {
+                    showErrorAlert("Limpieza Eliminó Todo",
+                            "El contenido del archivo TXT no es válido o fue eliminado durante la limpieza.");
+                    return;
+                }
 
-               if (cleanedLines.isEmpty()) {
-                   showErrorAlert("Limpieza Eliminó Todo", "El contenido del archivo TXT no es válido o fue eliminado durante la limpieza.");
-                   return;
-               }
+                // Validar y escribir contenido limpio en el archivo CSV
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(currentRespuestasFile))) {
+                    for (int i = 0; i < cleanedLines.size(); i++) {
+                        String line = cleanedLines.get(i);
+                        if (i == cleanedLines.size() - 1 && line.trim().isEmpty()) {
+                            continue;
+                        }
+                        writer.write(line);
+                        if (i < cleanedLines.size() - 1) {
+                            writer.newLine();
+                        }
+                    }
+                }
 
-               // Validar y escribir contenido limpio en el archivo CSV
-               try (BufferedWriter writer = new BufferedWriter(new FileWriter(currentRespuestasFile))) {
-                   for (int i = 0; i < cleanedLines.size(); i++) {
-                       String line = cleanedLines.get(i);
-                       if (i == cleanedLines.size() - 1 && line.trim().isEmpty()) {
-                           continue;
-                       }
-                       writer.write(line);
-                       if (i < cleanedLines.size() - 1) {
-                           writer.newLine();
-                       }
-                   }
-               }
+                System.out.println(
+                        "Archivo de respuestas actualizado desde TXT: " + currentRespuestasFile.getAbsolutePath());
 
-               System.out.println("Archivo de respuestas actualizado desde TXT: " + currentRespuestasFile.getAbsolutePath());
+                // Mostrar alerta de éxito
+                showSuccessAlert("Archivo de Respuestas Actualizado",
+                        "El archivo de respuestas se ha actualizado correctamente desde el archivo TXT.");
+            }
+        } catch (IOException e) {
+            showErrorAlert("Error al Actualizar Respuestas",
+                    "Ocurrió un error al intentar actualizar el archivo de respuestas.");
+        }
+    }
 
-               // Mostrar alerta de éxito
-               showSuccessAlert("Archivo de Respuestas Actualizado", "El archivo de respuestas se ha actualizado correctamente desde el archivo TXT.");
-           }
-       } catch (IOException e) {
-           showErrorAlert("Error al Actualizar Respuestas", "Ocurrió un error al intentar actualizar el archivo de respuestas.");
-       }
-   }
-
-
-
-    
     private List<String> cleanFileContentFromTxtForRespuestas(List<String> lines) {
         List<String> cleanedLines = new ArrayList<>();
         for (String line : lines) {
@@ -204,20 +218,17 @@ public class InicioController implements Initializable {
         }
 
         if (cleanedLines.isEmpty()) {
-            showErrorAlert("Limpieza Eliminó Todo", "El contenido del archivo TXT no es válido o fue eliminado durante la limpieza.");
+            showErrorAlert("Limpieza Eliminó Todo",
+                    "El contenido del archivo TXT no es válido o fue eliminado durante la limpieza.");
         }
         return cleanedLines;
     }
 
-
-    
     private boolean isValidRespuestaFormat(String line) {
         // Ejemplo: verifica que la línea tenga al menos 5 campos separados por comas
-        return line.matches("^[^,]+(,(si|no))+$"); // Asegúrate de que esta expresión regular sea correcta para el formato que esperas
+        return line.matches("^[^,]+(,(si|no))+$"); // Asegúrate de que esta expresión regular sea correcta para el
+                                                   // formato que esperas
     }
-
-
-
 
     private void showSuccessAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -226,7 +237,7 @@ public class InicioController implements Initializable {
         alert.setContentText(content);
         alert.showAndWait();
     }
-    
+
     private void showErrorAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -240,7 +251,7 @@ public class InicioController implements Initializable {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
-                // Eliminar BOM 
+                // Eliminar BOM
                 line = line.replace("\uFEFF", "");
 
                 // Eliminar cualquier punto y coma o coma adicional al final de cada línea

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompanyed_p1_sistemadetomadedecisiones_grupo09.luffynator.ConfiguracionController">
+    <stylesheets>
+        <URL value="@/styles/inicio.css" />
+    </stylesheets>
+    <children>
+        <ScrollPane layoutX="61.0" layoutY="47.0" prefHeight="491.0" prefWidth="716.0" fitToWidth="true" fitToHeight="false">
+        <content>
+            <VBox fx:id="animalListVBox" layoutX="5.0" prefHeight="475.0" prefWidth="693.0"/>
+        </content>
+      </ScrollPane>
+
+        <!-- Botón para volver -->
+        <Button fx:id="volverButton" layoutX="350.0" layoutY="526.0" mnemonicParsing="false" onAction="#volver" styleClass="button-general" text="Volver" />
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+</Pane>
